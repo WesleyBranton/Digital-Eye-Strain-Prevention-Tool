@@ -1,0 +1,108 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: black;
+}
+
+* {
+	cursor: default;
+	-moz-user-select:none;
+	user-select:none;
+}
+
+img {
+	pointer-events:none;
+}
+
+table {
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+}
+
+table tr td div {
+	background-color: white;
+	width: 40vw;
+	margin: auto;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+span {
+	color: blue;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+button {
+	border: none;
+	font-size: 200%;
+	cursor: pointer;
+	padding: 10px 30px;
+	border-radius: 10px;
+	box-sizing: border-box;
+	transition: ease 0.5s all;
+	color: white;
+}
+
+button:enabled:hover {
+	filter: brightness(150%);
+}
+
+button:disabled {
+	background-color:lightgrey;
+	cursor:not-allowed;
+}
+
+button#start, button#close, button#complete:enabled {
+	background-color: #00A63F;
+}
+
+button#goback {
+	background-color: #EA4335;
+}
+
+.blinking {
+	animation-name:blink;
+	animation-duration:0.5s;
+	animation-iteration-count:10;
+	animation-direction:alternate;
+}
+
+.countdown:before {
+	animation-name:countdown;
+	animation-duration:20s;
+	animation-iteration-count:1;
+	animation-direction:reverse;
+	content:"0";
+	font-size:200%;
+}
+
+@keyframes blink {
+	from {background-color:black}
+	to {background-color:white}
+}
+
+@keyframes countdown {
+	0% {content:"0"}
+	5% {content:"1"}
+	10% {content:"2"}
+	15% {content:"3"}
+	20% {content:"4"}
+	25% {content:"5"}
+	30% {content:"6"}
+	35% {content:"7"}
+	40% {content:"8"}
+	45% {content:"9"}
+	50% {content:"10"}
+	55% {content:"11"}
+	60% {content:"12"}
+	65% {content:"13"}
+	70% {content:"14"}
+	75% {content:"15"}
+	80% {content:"16"}
+	85% {content:"17"}
+	90% {content:"18"}
+	95% {content:"19"}
+	100% {content:"20"}
+}
