@@ -20,7 +20,10 @@ Further documentation about developing Firefox extensions can be found [here](ht
 
 ## Release Notes
 ### Version 2.0
-
+* **[NEW]** Users can now select browser notifications instead of popup
+* **[NEW]** 20s countdown no longer starts automatically
+* **[CHANGED]** Colour of flashing screen changed
+* **[CHANGED]** Changes to the UI styling
 
 ### Version 1.1.1
 * **[FIXED]** Text render error
