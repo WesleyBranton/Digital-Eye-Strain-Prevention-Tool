@@ -1,16 +1,22 @@
-browser.alarms.create('countdown',{delayInMinutes:0.33});
-browser.alarms.onAlarm.addListener(timerTrigger);
-document.getElementById('complete').addEventListener('click',gatherWindowInfo);
-document.onkeypress = function(e) {
-	if (e.keyCode == 13) {
-		e.preventDefault();
-		if (document.getElementById('complete').disabled == false) {
-			gatherWindowInfo();
+function start() {
+	browser.alarms.create('countdown',{delayInMinutes:0.33});
+	browser.alarms.onAlarm.addListener(timerTrigger);
+	document.getElementById('start').style.display = 'none';
+	document.getElementById('complete').style.display = 'inline';
+	document.getElementById('timer').className = 'animate';
+	document.getElementById('timer-bar').className = 'animate';
+	document.getElementById('complete').addEventListener('click',gatherWindowInfo);
+	document.onkeypress = function(e) {
+		if (e.keyCode == 13) {
+			e.preventDefault();
+			if (document.getElementById('complete').disabled == false) {
+				gatherWindowInfo();
+			}
+		} else if (e.keyCode == 8 || e.keyCode == 122 || e.keyCode == 27) {
+			e.preventDefault();
 		}
-	} else if (e.keyCode == 8 || e.keyCode == 122 || e.keyCode == 27) {
-		e.preventDefault();
-	}
-};
+	};
+}
 
 function timerTrigger(alarmInfo) {
 	if (alarmInfo.name == 'countdown') {
@@ -30,3 +36,5 @@ function gatherWindowInfo() {
 function closeWindow(windowInfo) {
 	browser.windows.remove(windowInfo.id);
 }
+
+document.getElementById('start').addEventListener('click',start);

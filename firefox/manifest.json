@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Digital Eye Strain Prevention Tool",
-	"version": "1.1.1",
+	"version": "2.0",
 	"description": "Prevent permanent damage to your eyes while browsing the web with this tool",
 
 	"icons": {
@@ -12,6 +12,10 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
+	
+	"options_ui": {
+		"page": "options/options.html"
+	},
 
-	"permissions": ["alarms"]
+	"permissions": ["alarms","storage","notifications"]
 }

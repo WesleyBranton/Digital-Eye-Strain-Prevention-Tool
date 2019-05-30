@@ -3,8 +3,8 @@
 	<head>
 		<title>20-20-20 Rule</title>
 		<link rel="stylesheet" href="style.css"/>
-		<link rel="icon" href="icons/icon-32.png"/>
-		<meta charset="utf-8" />
+		<link rel="icon" href="../icons/icon-32.png"/>
+		<meta charset="utf-8"/>
 	</head>
 	<body>
 		<audio id="audio">
@@ -13,13 +13,19 @@
 		<table>
 			<tr>
 				<td>
-					<div>
-						<img src="../images/header.png" id="header" /><br>
+					<section>
+						<div class="header-container"><img src="../images/header.png" id="header"/></div>
 						<h3 id="beforeMsg">Look at something at least 20 feet away until the timer stops</h3>
 						<h3 id="afterMsg" style="display:none">You may now continue your browsing session by clicking the <i>Continue Browsing</i> button</h3>
-						<h1 id="timer" class="countdown"></h1>
-						<button id="complete" disabled>Continue Browsing</button>
-					</div>
+						<div class="countdown-container">
+							<h1 id="timer" class=""></h1>
+							<div id="timer-bar" class=""></div>
+						</div>
+						<div class="button-container">
+							<button id="complete" class="button green" disabled style="display:none">Continue Browsing</button>
+							<button id="start" class="button green">Start</button>
+						</div>
+					</section>
 				</td>
 			</tr>
 		</table>
