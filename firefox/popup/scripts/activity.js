@@ -12,21 +12,6 @@ function start() {
 	document.getElementById('timer').className = 'animate';
 	document.getElementById('timer-bar').className = 'animate';
 	document.getElementById('complete').addEventListener('click',gatherWindowInfo);
-	
-	document.onkeypress = function(e) {
-		if (e.keyCode == 13) {
-			// Enter key
-			e.preventDefault();
-			if (document.getElementById('complete').disabled == false) {
-				// Close popup if timer is completed
-				gatherWindowInfo();
-			}
-		} else if (e.keyCode == 8 || e.keyCode == 122 || e.keyCode == 27) {
-			// Backspace, F11 or escape
-			// Prevent user from trying to close the popup
-			e.preventDefault();
-		}
-	};
 }
 
 // Handle 20s countdown end
