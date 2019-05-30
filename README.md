@@ -7,11 +7,14 @@ Luckily, there is a short exercise that, when performed routinely, can help to p
 
 The Digital Eye Strain Prevention Tool will remind you to perform this exercise every 20 minutes and will walk you through the process. Don't have the time to do it? No worries, you can postpone the exercise for 20 minutes.
 
-**CURRENT VERSION:** 1.1.1
+**CURRENT VERSION:** 2.0
 
 **PRODUCT PAGE:** [View Now](https://addons.mozilla.org/firefox/addon/eye-strain-prevention-tool/)
 
 ## Release Notes
+### Version 2.0
+
+
 ### Version 1.1.1
 * **[FIXED]** Text render error
 
