@@ -1,3 +1,4 @@
+/* Color variables */
 :root {
 	--color-light:#FFFFFF;
 	--color-dark:#262626;
@@ -34,6 +35,13 @@ table {
 	height:100vh;
 }
 
+/* Header */
+.header-container {
+	text-align:center;
+	padding-bottom:20px;
+}
+
+/* Content box */
 table tr td section {
 	background-color:var(--color-light);
 	width:40vw;
@@ -42,15 +50,18 @@ table tr td section {
 	box-shadow:2px 2px 10px #999;
 }
 
+/* Content box text */
 section p {
 	text-align:justify;
 	padding:5px 10px;
 }
 
+/* Button container */
 .button-container {
 	text-align:center;
 }
 
+/* Button template */
 .button {
 	border: none;
 	padding: 10px 30px;
@@ -63,18 +74,21 @@ section p {
 	box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
 }
 
+/* Green button */
 .button.green {
 	color:var(--color-light);
 	background-color: var(--color-green-light);
 	background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
 }
 
+/* Red button */
 .button.red {
 	color:var(--color-light);
 	background-color: var(--color-red-light);
 	background-image: linear-gradient(var(--color-red-light),var(--color-red-dark));
 }
 
+/* Disabled button */
 .button:disabled {
 	color:var(--color-grey);
 	background-color: var(--color-dull-light);
@@ -82,26 +96,31 @@ section p {
 	cursor:not-allowed;
 }
 
-.button:hover {
-	filter:brightness(80%);
-}
-
-.button.hidden:hover, .button:disabled:hover {
-	filter:none !important;
-}
-
+/* Buttons for non-recommended option */
 .button.hidden {
 	background-color:var(--color-light);
 	box-shadow:none;
 	color:var(--color-grey);
 }
 
+/* Button hover effect */
+.button:hover {
+	filter:brightness(80%);
+}
+
+/* Override hover effect for non-recommended option */
+.button.hidden:hover, .button:disabled:hover {
+	filter:none !important;
+}
+
+/* Headings */
 h1, h3 {
 	text-align:center;
 	padding:0px;
 	margin:0px;
 }
 
+/* Blinking background */
 .blinking {
 	animation-name:blink;
 	animation-duration:0.5s;
@@ -109,10 +128,12 @@ h1, h3 {
 	animation-direction:alternate;
 }
 
+/* Countdown container */
 .countdown-container {
 	padding-bottom:10px;
 }
 
+/* Countdown progress bar */
 #timer-bar {
 	height:10px;
 	background-color:var(--color-green-light);
@@ -121,6 +142,7 @@ h1, h3 {
 	width:100%;
 }
 
+/* Countdown progress bar animation */
 #timer-bar.animate {
 	animation-name:countdown-bar;
 	animation-duration:20s;
@@ -129,11 +151,18 @@ h1, h3 {
 	width:0%;
 }
 
+/* Countdown text timer */
+#timer {
+	padding:20px 0px;
+}
+
+/* Countdown text timer numbers */
 #timer:before {
 	content:"20";
 	font-size:200%;
 }
 
+/* Countdown text timer animation */
 #timer.animate:before {
 	animation-name:countdown;
 	animation-duration:20s;
@@ -141,20 +170,13 @@ h1, h3 {
 	content:"0";
 }
 
-#timer {
-	padding:20px 0px;
-}
-
-.header-container {
-	text-align:center;
-	padding-bottom:20px;
-}
-
+/* Blinking animation */
 @keyframes blink {
 	from {background-color:var(--color-dark)}
 	to {background-color:var(--color-green-dark)}
 }
 
+/* Countdown number animation */
 @keyframes countdown {
 	0% {content:"20"}
 	5% {content:"19"}
@@ -179,6 +201,7 @@ h1, h3 {
 	100% {content:"0"}
 }
 
+/* Countdown progress bar animation */
 @keyframes countdown-bar {
 	from {width:100%}
 	to {width:0%}

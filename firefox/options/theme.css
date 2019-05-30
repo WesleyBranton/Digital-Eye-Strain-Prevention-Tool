@@ -2,11 +2,13 @@
 	font-family: sans-serif;
 }
 
+/* Options section */
 fieldset {
 	border: 2px solid #47AAD5;
 	border-radius: 5px;
 }
 
+/* Options section title */
 legend {
 	padding:5px 10px;
 	font-size:14pt;

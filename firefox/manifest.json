@@ -3,6 +3,12 @@
 	"name": "Digital Eye Strain Prevention Tool",
 	"version": "2.0",
 	"description": "Prevent permanent damage to your eyes while browsing the web with this tool",
+	"author": "Wesley Branton",
+	
+	"developer": {
+		"name": "Wesley Branton",
+		"url": "http://addons.wesleybranton.com"
+	},
 
 	"icons": {
 		"48": "icons/icon-48.png",
