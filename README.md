@@ -21,7 +21,10 @@ Further documentation about developing Firefox extensions can be found [here](ht
 ## Release Notes
 ### Version 2.0
 * **[NEW]** Users can now select browser notifications instead of popup
+* **[NEW]** Users can now minimize popup temporarily
+* **[NEW]** Added "Do Not Disturb" mode
 * **[NEW]** 20s countdown no longer starts automatically
+* **[FIXED]** Fixed issue with popup not displaying
 * **[CHANGED]** Colour of flashing screen changed
 * **[CHANGED]** Changes to the UI styling
 
