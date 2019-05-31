@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
 /* Color variables */
 :root {
 	--color-dark:#1D1D1D;
@@ -29,7 +33,7 @@ img.header {
 
 /* Thank you letter */
 #thanks article {
-	background-image:url('image/paper.jpg');
+	background-image:url('../images/paper.jpg');
 	background-size:cover;
 	background-position:center;
 	background-repeat:no-repeat;
