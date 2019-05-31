@@ -64,7 +64,8 @@ function handleAlarm(alarmInfo) {
 function open(page) {
 	chrome.windows.create({
 		"url": chrome.extension.getURL("popup/" + page + ".html"),
-		"state": "fullscreen"
+		"state": "fullscreen",
+		"type": "popup"
 	});
 }
 
