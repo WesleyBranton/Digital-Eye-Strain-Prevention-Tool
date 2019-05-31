@@ -5,24 +5,6 @@ browser.storage.local.get('notificationMode', (res) => {
 	}
 });
 
-// Check that alarm is valid
-function gotAlarm(alarm) {
-	if (alarm) {
-		if (alarm.scheduledTime < new Date().getTime()) {
-			browser.alarms.clear("enablepopup");
-			startCountdown();
-		}
-	} else {
-		startCountdown();
-	}
-}
-
-// Trigger alarm verification check
-function checkAlarm() {
-	var getAlarm = browser.alarms.get("enablepopup");
-	getAlarm.then(gotAlarm);
-}
-
 var openWindow;
 startCountdown();
 browser.alarms.onAlarm.addListener(handleAlarm);
