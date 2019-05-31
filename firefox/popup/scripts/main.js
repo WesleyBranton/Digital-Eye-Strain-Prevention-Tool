@@ -17,6 +17,12 @@ function doLater() {
 async function minimize() {
 	var popup = await browser.windows.getCurrent();
 	browser.windows.update(popup.id,{state: "minimized"});
+	browser.notifications.create("eye-minimized",{
+		"type": "basic",
+		"iconUrl": browser.extension.getURL("icons/icon-96.png"),
+		"title": "You've delayed your eye activity!",
+		"message": "Once you have wrapped up your work and are ready to take a break, click this notification..."
+	});
 }
 
 // Send window ID to background.js

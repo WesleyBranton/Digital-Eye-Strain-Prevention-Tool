@@ -89,7 +89,11 @@ function notificationClick(notificationId) {
 // Handle browser notification close
 function notificationClosed(notificationId) {
 	if (notificationId == "eye-notification") {
+		// Restart timer
 		startCountdown();
+	} else if (notificationId == "eye-minimized") {
+		// Maximize popup
+		browser.windows.update(openWindow,{state: "fullscreen",focused: true});
 	}
 }
 
