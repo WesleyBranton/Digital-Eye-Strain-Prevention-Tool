@@ -48,6 +48,9 @@ function handleAlarm(alarmInfo) {
 function handleInstalled(details) {
 	if (details.reason == 'install') {
 		browser.tabs.create({url:"messages/new.html"});
+	} else if (details.reason == 'update') {
+		browser.tabs.create({url:"messages/update.html"});
+	}
 }
 
 // Open popup
