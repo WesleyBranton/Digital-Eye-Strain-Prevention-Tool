@@ -1,6 +1,7 @@
 gatherWindowInfo();
 document.getElementById('start').addEventListener('click',loadStart);
 document.getElementById('later').addEventListener('click',doLater);
+document.getElementById('wait').addEventListener('click',minimize);
 
 // Proceed to activity
 function loadStart() {
@@ -10,6 +11,12 @@ function loadStart() {
 // Proceed to cancel confirmation page
 function doLater() {
 	window.location.href = 'confirm.html';
+}
+
+// Minimize window
+async function minimize() {
+	var popup = await browser.windows.getCurrent();
+	browser.windows.update(popup.id,{state: "minimized"});
 }
 
 // Start timer reset procedure
