@@ -21,6 +21,7 @@ browser.notifications.onClosed.addListener(function(notificationId) {
   notificationClosed(notificationId);
 });
 browser.storage.local.set({'tempDisabled': 0});
+browser.runtime.onInstalled.addListener(handleInstalled);
 
 // Create timer
 function startCountdown() {
@@ -41,6 +42,12 @@ function handleAlarm(alarmInfo) {
 			}
 		});
 	}
+}
+
+// Handles install/update
+function handleInstalled(details) {
+	if (details.reason == 'install') {
+		browser.tabs.create({url:"messages/new.html"});
 }
 
 // Open popup

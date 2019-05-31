@@ -1,0 +1,111 @@
+/* Color variables */
+:root {
+	--color-dark:#1D1D1D;
+	--color-donate-light:#0080FF;
+	--color-donate-dark:#0066CC;
+	--color-review-light:#40BF40;
+	--color-review-dark:#339933;
+	--color-bug-light:#FF0000;
+	--color-bug-dark:#CC0000;
+	--color-code-light:#FFAD33;
+	--color-code-dark:#FF9900;
+}
+
+/* Body reset */
+body {
+	padding:0px;
+	margin:0px;
+	font-family:sans-serif;
+	color:var(--color-dark);
+}
+
+/* Eyes header image */
+img.header {
+	padding:0px;
+	margin:0px;
+	width:100%;
+}
+
+/* Thank you letter */
+#thanks article {
+	background-image:url('../image/paper.jpg');
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+	font-family:cursive;
+	width:60%;
+	margin:auto;
+	padding:10px;
+	border-radius:3px;
+	transform:rotate(1deg);
+	box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.25);
+	box-sizing:border-box;
+	margin-top:1em;
+}
+
+/* Thank you letter signature */
+#thanks article p.sig {
+	font-size:120%;
+	margin-left:1em;
+}
+
+/* Bottom container */
+#bottom {
+	text-align:center;
+	display:flex;
+	margin:1em;
+}
+
+/* Side-by-side elements */
+.split {
+	flex:1;
+}
+
+/* Contribution button template */
+#contribute .button {
+	display:inline-block;
+	font-size:120%;
+	font-weight:bold;
+	text-decoration:none;
+	border-radius:100px;
+	box-sizing:border-box;
+	padding:10px 40px;
+	margin:2px 0px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: ease all 0.5s;
+	box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
+}
+
+/* Contribution button hover effect */
+#contribute .button:hover {
+	filter:brightness(80%);
+}
+
+/* Dontate button */
+.button.donate {
+	color:white;
+	background-color: var(--color-donate-light);
+	background-image: linear-gradient(var(--color-donate-light),var(--color-donate-dark));
+}
+
+/* Review button */
+.button.review {
+	color:white;
+	background-color: var(--color-review-light);
+	background-image: linear-gradient(var(--color-review-light),var(--color-review-dark));
+}
+
+/* Report bug button */
+.button.bug {
+	color:white;
+	background-color: var(--color-bug-light);
+	background-image: linear-gradient(var(--color-bug-light),var(--color-bug-dark));
+}
+
+/* Contribute code button */
+.button.code {
+	color:white;
+	background-color: var(--color-code-light);
+	background-image: linear-gradient(var(--color-code-light),var(--color-code-dark));
+}
