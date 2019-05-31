@@ -1,26 +1,17 @@
-document.getElementById('close').addEventListener('click',gatherWindowInfo);
-document.getElementById('goback').addEventListener('click',goback);
-document.onkeypress = function(e) {
-	if (e.keyCode == 13) {
-		e.preventDefault();
-		gatherWindowInfo();
-	} else if (e.keyCode == 27) {
-		e.preventDefault();
-		goback();
-	} else if (e.keyCode == 8 || e.keyCode == 122) {
-		e.preventDefault();
-	}
-};
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+document.getElementById('close').addEventListener('click',closeWindow);
+document.getElementById('goback').addEventListener('click',goback);
+
+// Go back to main menu
 function goback() {
 	window.location.href = 'main.html';
 }
 
-function gatherWindowInfo() {
-	var getting = browser.windows.getCurrent();
-	getting.then(closeWindow);
-}
-
-function closeWindow(windowInfo) {
-	browser.windows.remove(windowInfo.id);
+// Close popup
+async function closeWindow() {
+	var popup = await browser.windows.getCurrent();
+	browser.windows.remove(popup.id);
 }

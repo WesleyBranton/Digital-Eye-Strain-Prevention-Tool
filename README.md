@@ -19,6 +19,15 @@ To develop and test the extension, you need to open the "about:debugging" page i
 Further documentation about developing Firefox extensions can be found [here](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension).
 
 ## Release Notes
+### Version 2.0
+* **[NEW]** Users can now select browser notifications instead of popup
+* **[NEW]** Users can now minimize popup temporarily
+* **[NEW]** Added "Do Not Disturb" mode
+* **[NEW]** 20s countdown no longer starts automatically
+* **[FIXED]** Fixed issue with popup not displaying
+* **[CHANGED]** Colour of flashing screen changed
+* **[CHANGED]** Changes to the UI styling
+
 ### Version 1.1.1
 * **[FIXED]** Text render error
 
