@@ -38,6 +38,7 @@ browser.notifications.onClicked.addListener(function(notificationId) {
 browser.notifications.onClosed.addListener(function(notificationId) {
   notificationClosed(notificationId);
 });
+browser.storage.local.set({'tempDisabled': 0});
 
 // Create timer
 function startCountdown() {
@@ -124,5 +125,11 @@ function firstRun() {
 
 // Handle browser messages
 function handleMessages(msgCode) {
-	openWindow = msgCode;
+	if (msgCode == 'disabletimer') {
+		browser.alarms.clear("enablepopup");
+	} else if (msgCode == 'enabletimer') {
+		startCountdown();
+	} else {
+		openWindow = msgCode;
+	}
 }
