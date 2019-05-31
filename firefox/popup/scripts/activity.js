@@ -11,7 +11,7 @@ function start() {
 	document.getElementById('complete').style.display = 'inline';
 	document.getElementById('timer').className = 'animate';
 	document.getElementById('timer-bar').className = 'animate';
-	document.getElementById('complete').addEventListener('click',gatherWindowInfo);
+	document.getElementById('complete').addEventListener('click',closeWindow);
 }
 
 // Handle 20s countdown end
@@ -28,13 +28,8 @@ function timerTrigger(alarmInfo) {
 	}
 }
 
-// Start window close procedure
-function gatherWindowInfo() {
-	var getting = browser.windows.getCurrent();
-	getting.then(closeWindow);
-}
-
-// Close popup window
-function closeWindow(windowInfo) {
-	browser.windows.remove(windowInfo.id);
+// Close popup
+async function closeWindow() {
+	var popup = await browser.windows.getCurrent();
+	browser.windows.remove(popup.id);
 }

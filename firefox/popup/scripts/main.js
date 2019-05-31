@@ -1,4 +1,4 @@
-gatherWindowInfo();
+sendWindowId();
 document.getElementById('start').addEventListener('click',loadStart);
 document.getElementById('later').addEventListener('click',doLater);
 document.getElementById('wait').addEventListener('click',minimize);
@@ -19,13 +19,8 @@ async function minimize() {
 	browser.windows.update(popup.id,{state: "minimized"});
 }
 
-// Start timer reset procedure
-function gatherWindowInfo() {
-	var getting = browser.windows.getCurrent();
-	getting.then(sendInfo);
-}
-
-// Tell background.js to set new timer
-function sendInfo(windowInfo) {
-	chrome.runtime.sendMessage(windowInfo.id);
+// Send window ID to background.js
+async function sendWindowId() {
+	var popup = await browser.windows.getCurrent();
+	chrome.runtime.sendMessage(popup.id);
 }
