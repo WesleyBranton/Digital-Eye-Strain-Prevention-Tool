@@ -1,4 +1,4 @@
-# Digital-Eye-Strain-Prevention-Tool
+# Digital Eye Strain Prevention Tool [<img align="right" src=".github/fxaddon.png">](https://addons.mozilla.org/firefox/addon/eye-strain-prevention-tool/)
 As technology becomes more and more a part of our lives, digital eye strain has become an increasing problem in children, teens and adults. Using a digital device for a prolonged period of time can strain your eyes and in turn, lead to permanent vision damage. It can also cause some short term side-effects, such as blurred vision and headaches.
 
 According to The Vision Council, over 87% of Americans admit to using digital devices for more than two hours at a time. This means that the concern about eye strain is a wide-spread concern spanning across all ages.
@@ -6,8 +6,6 @@ According to The Vision Council, over 87% of Americans admit to using digital de
 Luckily, there is a short exercise that, when performed routinely, can help to prevent damage to the eyes from digital screens. It's called the 20-20-20 rule, in which you focus on an object at least 20 feet away for 20 seconds every 20 minutes of screen time.
 
 The Digital Eye Strain Prevention Tool will remind you to perform this exercise every 20 minutes and will walk you through the process. Don't have the time to do it? No worries, you can postpone the exercise for 20 minutes.
-
-**PRODUCT PAGE:** [View Now](https://addons.mozilla.org/firefox/addon/eye-strain-prevention-tool/)
 
 ## Development
 This repository contains all of the required source code files to make changes to this extension. The "master" branch contains the source code for the latest stable release. If you want to test that version, you can view the release section to download the XPI file or visit the add-on listing on Mozilla.
