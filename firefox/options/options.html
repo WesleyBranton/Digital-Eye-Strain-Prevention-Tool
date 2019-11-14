@@ -4,33 +4,33 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="theme.css"/>
-	</head>
-	<body>
-		<form>
-			<fieldset>
-				<legend>Settings</legend>
-				<label for="notificationMode">Notification Mode: </label>
-				<select name="notificationMode" id="notificationMode">
-					<option value="0">Browser Notification</option>
-					<option value="1">Fullscreen Popup</option>
-				</select><br><br>
-				<b>Browser Notification:</b> This will display a small notification window in the lower right corner of your screen when you reach the screen time limit.<br>
-				<b>Fullscreen Popup (Default):</b> This will display a fullscreen message when you reach the screen time limit.
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend>Do Not Disturb</legend>
-				<label for="tempDisabled">Do Not Disturb Mode: </label>
-				<select name="tempDisabled" id="tempDisabled">
-					<option value="0">Inactive</option>
-					<option value="1">Active</option>
-				</select>
-				<p>Do Not Disturb mode allows you to temporarily disable all future reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage.</p>
-			</fieldset>
-		</form>
-		<script src="options.js"></script>
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="theme.css">
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend>Settings</legend>
+                <label for="notificationMode">Notification Mode: </label>
+                <select name="notificationMode" id="notificationMode">
+                    <option value="0">Browser Notification</option>
+                    <option value="1">Fullscreen Popup</option>
+                </select><br><br>
+                <b>Browser Notification:</b> This will display a small notification window in the lower right corner of your screen when you reach the screen time limit.<br>
+                <b>Fullscreen Popup (Default):</b> This will display a fullscreen message when you reach the screen time limit.
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Do Not Disturb</legend>
+                <label for="tempDisabled">Do Not Disturb Mode: </label>
+                <select name="tempDisabled" id="tempDisabled">
+                    <option value="0">Inactive</option>
+                    <option value="1">Active</option>
+                </select>
+                <p>Do Not Disturb mode allows you to temporarily disable all future reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage.</p>
+            </fieldset>
+        </form>
+        <script src="options.js"></script>
+    </body>
 </html>

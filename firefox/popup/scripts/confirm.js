@@ -2,16 +2,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-document.getElementById('close').addEventListener('click',closeWindow);
-document.getElementById('goback').addEventListener('click',goback);
+document.getElementById('close').addEventListener('click', closeWindow);
+document.getElementById('goback').addEventListener('click', goback);
 
 // Go back to main menu
 function goback() {
-	window.location.href = 'main.html';
+    window.location.href = 'main.html';
 }
 
 // Close popup
 async function closeWindow() {
-	var popup = await browser.windows.getCurrent();
-	browser.windows.remove(popup.id);
+    var popup = await browser.windows.getCurrent();
+    browser.windows.remove(popup.id);
 }
