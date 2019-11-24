@@ -6,30 +6,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="theme.css">
+        <link rel="stylesheet" href="../lib/new_browser_style.css">
     </head>
-    <body>
-        <form>
-            <fieldset>
-                <legend>Settings</legend>
-                <label for="notificationMode">Notification Mode: </label>
-                <select name="notificationMode" id="notificationMode">
+    <body class="browser-style">
+        <form name="settings">
+            <section class="panel-section">
+                <label>Notification Mode</label>
+                <select name="notificationMode">
                     <option value="0">Browser Notification</option>
                     <option value="1">Fullscreen Popup</option>
-                </select><br><br>
-                <b>Browser Notification:</b> This will display a small notification window in the lower right corner of your screen when you reach the screen time limit.<br>
-                <b>Fullscreen Popup (Default):</b> This will display a fullscreen message when you reach the screen time limit.
-            </fieldset>
-            <br>
-            <fieldset>
-                <legend>Do Not Disturb</legend>
-                <label for="tempDisabled">Do Not Disturb Mode: </label>
-                <select name="tempDisabled" id="tempDisabled">
-                    <option value="0">Inactive</option>
-                    <option value="1">Active</option>
                 </select>
-                <p>Do Not Disturb mode allows you to temporarily disable all future reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage.</p>
-            </fieldset>
+            </section>
+            <section class="panel-section has-help">
+                <label>Do Not Disturb Mode</label>
+                <div>
+                    <label><input type="radio" name="tempDisabled" value="0"> Inactive</label>
+                    <label><input type="radio" name="tempDisabled" value="1"> Active</label>
+                </div>
+            </section>
+            <section class="panel-section help-row">
+                Allows you to temporarily disable all reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage.
+            </section>
         </form>
         <script src="options.js"></script>
     </body>
