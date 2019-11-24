@@ -1,29 +1,30 @@
 {
-	"manifest_version": 2,
-	"name": "Digital Eye Strain Prevention Tool",
-	"version": "2.0",
-	"description": "Prevent permanent damage to your eyes while browsing the web with this tool",
-	"author": "Wesley Branton",
-	
-	"developer": {
-		"name": "Wesley Branton",
-		"url": "http://addons.wesleybranton.com"
-	},
+    "manifest_version": 2,
+    "name": "Digital Eye Strain Prevention Tool",
+    "version": "2.0.1",
+    "description": "Prevent permanent damage to your eyes while browsing the web with this tool",
+    "author": "Wesley Branton",
+    
+    "developer": {
+        "name": "Wesley Branton",
+        "url": "http://addons.wesleybranton.com"
+    },
 
-	"icons": {
-		"32": "icons/icon-32.png",
-		"48": "icons/icon-48.png",
-		"64": "icons/icon-64.png",
-		"96": "icons/icon-96.png"
-	},
-	
-	"background": {
-		"scripts": ["background.js"]
-	},
-	
-	"options_ui": {
-		"page": "options/options.html"
-	},
+    "icons": {
+        "32": "icons/icon-32.png",
+        "48": "icons/icon-48.png",
+        "64": "icons/icon-64.png",
+        "96": "icons/icon-96.png"
+    },
+    
+    "background": {
+        "scripts": ["background.js"]
+    },
+    
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": false
+    },
 
-	"permissions": ["alarms","storage","notifications"]
+    "permissions": ["alarms","storage","notifications"]
 }

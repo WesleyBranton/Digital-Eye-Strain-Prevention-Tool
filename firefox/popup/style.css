@@ -1,212 +1,212 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+ * file, You can obtain one at https: //mozilla.org/MPL/2.0/. */
 
 /* Color variables */
 :root {
-	--color-light:#FFFFFF;
-	--color-dark:#262626;
-	--color-dark-light:#999999;
-	--color-grey:#C2C2C2;
-	--color-green-light:#00CC66;
-	--color-green-dark:#00994D;
-	--color-red-light:#FF1A1A;
-	--color-red-dark:#E60000;
-	--color-dull-light:#F2F2F2;
-	--color-dull-dark:#D9D9D9;
+    --color-light: #FFFFFF;
+    --color-dark: #262626;
+    --color-dark-light: #999999;
+    --color-grey: #C2C2C2;
+    --color-green-light: #00CC66;
+    --color-green-dark: #00994D;
+    --color-red-light: #FF1A1A;
+    --color-red-dark: #E60000;
+    --color-dull-light: #F2F2F2;
+    --color-dull-dark: #D9D9D9;
 }
 
 body {
-	padding:0px;
-	margin:0px;
-	background-color:var(--color-dark);
-	font-family:sans-serif;
-	color:var(--color-dark);
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-dark);
+    font-family: sans-serif;
+    color: var(--color-dark);
 }
 
 * {
-	cursor:default;
-	-moz-user-select:none;
-	user-select:none;
+    cursor: default;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 img {
-	pointer-events:none;
+    pointer-events: none;
 }
 
 table {
-	width:100vw;
-	height:100vh;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Header */
 .header-container {
-	text-align:center;
-	padding-bottom:20px;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 /* Content box */
 table tr td section {
-	background-color:var(--color-light);
-	width:40vw;
-	margin:auto;
-	padding:10px;
-	box-shadow:2px 2px 10px #999;
+    background-color: var(--color-light);
+    width: 40vw;
+    margin: auto;
+    padding: 10px;
+    box-shadow: 2px 2px 10px #999;
 }
 
 /* Content box text */
 section p {
-	text-align:justify;
-	padding:5px 10px;
+    text-align: justify;
+    padding: 5px 10px;
 }
 
 /* Button container */
 .button-container {
-	text-align:center;
+    text-align: center;
 }
 
 /* Button template */
 .button {
-	border: none;
-	padding: 10px 30px;
-	font-size: 14pt;
-	font-weight: bold;
-	border-radius: 100px;
-	text-transform: uppercase;
-	cursor: pointer;
-	transition: ease all 0.5s;
-	box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
+    border: none;
+    padding: 10px 30px;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 100px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: ease all 0.5s;
+    box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
 }
 
 /* Green button */
 .button.green {
-	color:var(--color-light);
-	background-color: var(--color-green-light);
-	background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
+    color: var(--color-light);
+    background-color: var(--color-green-light);
+    background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
 }
 
 /* Red button */
 .button.red {
-	color:var(--color-light);
-	background-color: var(--color-red-light);
-	background-image: linear-gradient(var(--color-red-light),var(--color-red-dark));
+    color: var(--color-light);
+    background-color: var(--color-red-light);
+    background-image: linear-gradient(var(--color-red-light),var(--color-red-dark));
 }
 
 /* Disabled button */
 .button:disabled {
-	color:var(--color-grey);
-	background-color: var(--color-dull-light);
-	background-image: linear-gradient(var(--color-dull-light),var(--color-dull-dark));
-	cursor:not-allowed;
+    color: var(--color-grey);
+    background-color: var(--color-dull-light);
+    background-image: linear-gradient(var(--color-dull-light),var(--color-dull-dark));
+    cursor: not-allowed;
 }
 
 /* Buttons for non-recommended option */
 .button.hidden {
-	background-color:var(--color-light);
-	box-shadow:none;
-	color:var(--color-grey);
+    background-color: var(--color-light);
+    box-shadow: none;
+    color: var(--color-grey);
 }
 
 /* Button hover effect */
 .button:hover {
-	filter:brightness(80%);
+    filter: brightness(80%);
 }
 
 /* Override hover effect for non-recommended option */
-.button.hidden:hover, .button:disabled:hover {
-	filter:none !important;
+.button.hidden: hover, .button: disabled: hover {
+    filter: none !important;
 }
 
 /* Headings */
 h1, h3 {
-	text-align:center;
-	padding:0px;
-	margin:0px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
 }
 
 /* Blinking background */
 .blinking {
-	animation-name:blink;
-	animation-duration:0.5s;
-	animation-iteration-count:10;
-	animation-direction:alternate;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-iteration-count: 10;
+    animation-direction: alternate;
 }
 
 /* Countdown container */
 .countdown-container {
-	padding-bottom:10px;
+    padding-bottom: 10px;
 }
 
 /* Countdown progress bar */
 #timer-bar {
-	height:10px;
-	background-color:var(--color-green-light);
-	background-image:linear-gradient(var(--color-green-light),var(--color-green-dark));
-	border-radius:3px;
-	width:100%;
+    height: 10px;
+    background-color: var(--color-green-light);
+    background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
+    border-radius: 3px;
+    width: 100%;
 }
 
 /* Countdown progress bar animation */
 #timer-bar.animate {
-	animation-name:countdown-bar;
-	animation-duration:20s;
-	animation-iteration-count:1;
-	animation-timing-function:linear;
-	width:0%;
+    animation-name: countdown-bar;
+    animation-duration: 20s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    width: 0%;
 }
 
 /* Countdown text timer */
 #timer {
-	padding:20px 0px;
+    padding: 20px 0;
 }
 
 /* Countdown text timer numbers */
 #timer:before {
-	content:"20";
-	font-size:200%;
+    content: "20";
+    font-size: 200%;
 }
 
 /* Countdown text timer animation */
 #timer.animate:before {
-	animation-name:countdown;
-	animation-duration:20s;
-	animation-iteration-count:1;
-	content:"0";
+    animation-name: countdown;
+    animation-duration: 20s;
+    animation-iteration-count: 1;
+    content: "0";
 }
 
 /* Blinking animation */
 @keyframes blink {
-	from {background-color:var(--color-dark)}
-	to {background-color:var(--color-green-dark)}
+    from {background-color: var(--color-dark)}
+    to {background-color: var(--color-green-dark)}
 }
 
 /* Countdown number animation */
 @keyframes countdown {
-	0% {content:"20"}
-	5% {content:"19"}
-	10% {content:"18"}
-	15% {content:"17"}
-	20% {content:"16"}
-	25% {content:"15"}
-	30% {content:"14"}
-	35% {content:"13"}
-	40% {content:"12"}
-	45% {content:"11"}
-	50% {content:"10"}
-	55% {content:"9"}
-	60% {content:"8"}
-	65% {content:"7"}
-	70% {content:"6"}
-	75% {content:"5"}
-	80% {content:"4"}
-	85% {content:"3"}
-	90% {content:"2"}
-	95% {content:"1"}
-	100% {content:"0"}
+    0% {content: "20"}
+    5% {content: "19"}
+    10% {content: "18"}
+    15% {content: "17"}
+    20% {content: "16"}
+    25% {content: "15"}
+    30% {content: "14"}
+    35% {content: "13"}
+    40% {content: "12"}
+    45% {content: "11"}
+    50% {content: "10"}
+    55% {content: "9"}
+    60% {content: "8"}
+    65% {content: "7"}
+    70% {content: "6"}
+    75% {content: "5"}
+    80% {content: "4"}
+    85% {content: "3"}
+    90% {content: "2"}
+    95% {content: "1"}
+    100% {content: "0"}
 }
 
 /* Countdown progress bar animation */
 @keyframes countdown-bar {
-	from {width:100%}
-	to {width:0%}
+    from {width: 100%}
+    to {width: 0%}
 }
