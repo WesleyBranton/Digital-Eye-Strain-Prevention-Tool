@@ -6,12 +6,12 @@
 function saveOptions() {
     // Notification mode setting
     browser.storage.local.set({
-        'notificationMode': document.settings.notificationMode.value
+        'notificationMode': parseInt(document.settings.notificationMode.value)
     });
     
     // Do Not Disturb setting
     browser.storage.local.set({
-        'tempDisabled': document.settings.tempDisabled.value
+        'tempDisabled': parseInt(document.settings.tempDisabled.value)
     });
     
     // Apply changes to Do Not Disturb setting
