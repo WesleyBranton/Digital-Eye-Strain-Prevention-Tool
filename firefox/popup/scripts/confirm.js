@@ -13,5 +13,6 @@ function goback() {
 // Close popup
 async function closeWindow() {
     var popup = await browser.windows.getCurrent();
+    await browser.runtime.sendMessage('activityFinished');
     browser.windows.remove(popup.id);
 }

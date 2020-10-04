@@ -10,6 +10,7 @@ browser.storage.local.get('notificationMode', (res) => {
 });
 
 var openWindow;
+let activityPending = false;
 enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
 chrome.runtime.onMessage.addListener(handleMessages);
@@ -27,6 +28,7 @@ browser.notifications.onClosed.addListener(function(notificationId) {
 browser.storage.local.set({'tempDisabled': 0});
 browser.runtime.onInstalled.addListener(handleInstalled);
 browser.tabs.onUpdated.addListener(checkTimer);
+browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
 
 // Check that alarm is valid
 async function checkTimer() {
@@ -50,6 +52,7 @@ function handleAlarm(alarmInfo) {
                 open('main');
             }
         });
+        activityWaiting();
     }
 }
 
@@ -149,5 +152,25 @@ async function enableTimer() {
 function handleMessages(msgCode) {
     if (msgCode == 'disabletimer') disableTimer();
     else if (msgCode == 'enabletimer') enableTimer();
+    else if (msgCode == 'activityFinished') activityFinished();
     else openWindow = msgCode;
+}
+
+// Handle toolbar button click
+function handleBrowserActionClicked() {
+    if (activityPending) open('activity');
+}
+
+// End activity
+function activityFinished() {
+    activityPending = false;
+    browser.browserAction.setIcon({ path: 'icons/browserAction/disabled.png' });
+    browser.browserAction.setBadgeText({ text: '' });
+}
+
+// Add activity to queue
+function activityWaiting() {
+    activityPending = true;
+    browser.browserAction.setIcon({ path: 'icons/browserAction/active.gif' });
+    browser.browserAction.setBadgeText({ text: ' ! ' });
 }

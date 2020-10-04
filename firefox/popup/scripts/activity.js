@@ -31,6 +31,9 @@ function timerTrigger(alarmInfo) {
         document.getElementById('complete').disabled = false;
         document.getElementById('beforeMsg').style.display = 'none';
         document.getElementById('afterMsg').style.display = 'block';
+
+        // Reset browserAction
+        browser.runtime.sendMessage('activityFinished');
     }
 }
 
