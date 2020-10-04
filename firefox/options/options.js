@@ -12,8 +12,8 @@ function saveOptions() {
     });
     
     // Apply changes to Do Not Disturb setting
-    if (document.settings.tempDisabled.value == 1) chrome.runtime.sendMessage('disabletimer');
-    else chrome.runtime.sendMessage('enabletimer');
+    if (document.settings.tempDisabled.value == 1) browser.runtime.sendMessage('disabletimer');
+    else browser.runtime.sendMessage('enabletimer');
 }
 
 // Prefill saved settings into option page

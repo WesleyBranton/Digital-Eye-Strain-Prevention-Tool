@@ -6,7 +6,7 @@ let openWindow;
 let activityPending = false;
 enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
-chrome.runtime.onMessage.addListener(handleMessages);
+browser.runtime.onMessage.addListener(handleMessages);
 browser.windows.onRemoved.addListener((wID) => { if (wID == openWindow) enableTimer(); });
 browser.notifications.onClicked.addListener((nID) => { notificationClick(nID); });
 browser.notifications.onClosed.addListener((nID) => { notificationClosed(nID); });
@@ -51,8 +51,8 @@ function handleInstalled(details) {
 
 // Open popup
 function open(page) {
-    chrome.windows.create({
-        'url': chrome.extension.getURL('popup/' + page + '.html'),
+    browser.windows.create({
+        'url': browser.extension.getURL('popup/' + page + '.html'),
         'state': 'fullscreen',
         'type': 'popup'
     });
