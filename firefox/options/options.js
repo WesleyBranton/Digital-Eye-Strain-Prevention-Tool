@@ -12,13 +12,8 @@ function saveOptions() {
     });
     
     // Apply changes to Do Not Disturb setting
-    if (document.settings.tempDisabled.value == 1 && !isDisabled) {
-        chrome.runtime.sendMessage('disabletimer');
-        isDisabled = true;
-    } else if (document.settings.tempDisabled.value == 0 && isDisabled) {
-        chrome.runtime.sendMessage('enabletimer');
-        isDisabled = false;
-    }
+    if (document.settings.tempDisabled.value == 1) chrome.runtime.sendMessage('disabletimer');
+    else chrome.runtime.sendMessage('enabletimer');
 }
 
 // Prefill saved settings into option page
@@ -35,12 +30,8 @@ async function restoreOptions() {
 
     // Do Not Disturb setting
     if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
-    else {
-        document.settings.tempDisabled.value = data.tempDisabled;
-        isDisabled = data.tempDisabled == 1;
-    }
+    else document.settings.tempDisabled.value = data.tempDisabled;
 }
 
-let isDisabled = false;
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
