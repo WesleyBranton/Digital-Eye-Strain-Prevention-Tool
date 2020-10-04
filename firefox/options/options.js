@@ -48,6 +48,6 @@ async function restoreOptions() {
     }
 }
 
-var isDisabled = false;
+let isDisabled = false;
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);

@@ -39,6 +39,6 @@ function timerTrigger(alarmInfo) {
 
 // Close popup
 async function closeWindow() {
-    var popup = await browser.windows.getCurrent();
+    const popup = await browser.windows.getCurrent();
     browser.windows.remove(popup.id);
 }

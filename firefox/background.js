@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-var openWindow;
+let openWindow;
 let activityPending = false;
 enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
@@ -34,7 +34,7 @@ async function checkTimer() {
 
 // Handle timer trigger
 async function handleAlarm(alarmInfo) {
-    var trigger = alarmInfo.name;
+    const trigger = alarmInfo.name;
     if (trigger == 'enablepopup') {
         const data = await browser.storage.local.get();
         
@@ -112,7 +112,7 @@ function notificationClosed(notificationId) {
 // Generate random notification messages
 function getMessage(msg) {
     if (msg == 'title') {
-        var messages = [
+        const messages = [
             "It's time to protect your eyes!",
             "Hey! Look over here!",
             "Yours eyes are super important!",
@@ -121,7 +121,7 @@ function getMessage(msg) {
             "Healthy eyes are happy eyes!"
         ];
     } else if (msg == 'message') {
-        var messages = [
+        const messages = [
             "You've been looking at your screen for a long time. Let's give your eyes a break.",
             "You are reading this message thanks to your eyes. Show them some appreciation by doing this short exercise to prevent digital eye strain.",
             "You look like you're being really productive right now. Let's take a short break to protect your eyes.",
@@ -129,7 +129,7 @@ function getMessage(msg) {
             "Staring at your computer screen for long periods of time can lead to permanent damage. Let's prevent that with a short activity."
         ];
     }
-    var random = Math.floor(Math.random() * Math.floor(messages.length));
+    const random = Math.floor(Math.random() * Math.floor(messages.length));
     return messages[random];
 }
 

@@ -33,6 +33,6 @@ async function minimize() {
 
 // Send window ID to background.js
 async function sendWindowId() {
-    var popup = await browser.windows.getCurrent();
+    const popup = await browser.windows.getCurrent();
     chrome.runtime.sendMessage(popup.id);
 }
