@@ -7,9 +7,7 @@ document.getElementById('start').addEventListener('click', start);
 // Start the 20s countdown
 function start() {
     // Create timer
-    browser.alarms.create('countdown', {
-        delayInMinutes: 0.33
-    });
+    browser.alarms.create('countdown', { delayInMinutes: 0.33 });
     browser.alarms.onAlarm.addListener(timerTrigger);
     
     // Update GUI
@@ -31,11 +29,14 @@ function timerTrigger(alarmInfo) {
         document.getElementById('complete').disabled = false;
         document.getElementById('beforeMsg').style.display = 'none';
         document.getElementById('afterMsg').style.display = 'block';
+
+        // Reset browserAction
+        browser.runtime.sendMessage('activityFinished');
     }
 }
 
 // Close popup
 async function closeWindow() {
-    var popup = await browser.windows.getCurrent();
+    const popup = await browser.windows.getCurrent();
     browser.windows.remove(popup.id);
 }
