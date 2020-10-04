@@ -19,10 +19,8 @@ function doLater() {
 
 // Minimize window
 async function minimize() {
-    var popup = await browser.windows.getCurrent();
-    browser.windows.update(popup.id, {
-        state: 'minimized'
-    });
+    const popup = await browser.windows.getCurrent();
+    browser.windows.update(popup.id, { state: 'minimized' });
     browser.notifications.create('eye-minimized', {
         'type': 'basic',
         'iconUrl': browser.extension.getURL('icons/icon-96.png'),

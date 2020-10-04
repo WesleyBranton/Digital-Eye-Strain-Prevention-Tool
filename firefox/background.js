@@ -7,18 +7,10 @@ let activityPending = false;
 enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
 chrome.runtime.onMessage.addListener(handleMessages);
-browser.windows.onRemoved.addListener((windowId) => {
-    if (windowId == openWindow) {
-        enableTimer();
-    }
-});
-browser.notifications.onClicked.addListener(function(notificationId) {
-  notificationClick(notificationId);
-});
-browser.notifications.onClosed.addListener(function(notificationId) {
-  notificationClosed(notificationId);
-});
-browser.storage.local.set({'tempDisabled': 0});
+browser.windows.onRemoved.addListener((wID) => { if (wID == openWindow) enableTimer(); });
+browser.notifications.onClicked.addListener((nID) => { notificationClick(nID); });
+browser.notifications.onClosed.addListener((nID) => { notificationClosed(nID); });
+browser.storage.local.set({ 'tempDisabled': 0 });
 browser.runtime.onInstalled.addListener(handleInstalled);
 browser.tabs.onUpdated.addListener(checkTimer);
 browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
@@ -38,13 +30,8 @@ async function handleAlarm(alarmInfo) {
     if (trigger == 'enablepopup') {
         const data = await browser.storage.local.get();
         
-        if (typeof data.notificationMode === 'undefined' || data.notificationMode == 1) {
-            // Display popup
-            open('main');
-        } else if (data.notificationMode == 0) {
-            // Display browser notification
-            notify();
-        }
+        if (typeof data.notificationMode === 'undefined' || data.notificationMode == 1) open('main');
+        else if (data.notificationMode == 0) notify();
 
         // Play chime (if enabled)
         if (typeof data.playChime === 'undefined' || data.playChime == 1) {
@@ -58,15 +45,8 @@ async function handleAlarm(alarmInfo) {
 
 // Handles install/update
 function handleInstalled(details) {
-    if (details.reason == 'install') {
-        browser.tabs.create({
-            url: 'messages/new.html'
-        });
-    } else if (details.reason == 'update') {
-        browser.tabs.create({
-            url: 'messages/update.html'
-        });
-    }
+    if (details.reason == 'install') browser.tabs.create({ url: 'messages/new.html' });
+    else if (details.reason == 'update') browser.tabs.create({ url: 'messages/update.html' });
 }
 
 // Open popup
@@ -90,9 +70,7 @@ function notify() {
 
 // Handle browser notification click
 function notificationClick(notificationId) {
-    if (notificationId == 'eye-notification') {
-        open('activity');
-    }
+    if (notificationId == 'eye-notification') open('activity');
 }
 
 // Handle browser notification close

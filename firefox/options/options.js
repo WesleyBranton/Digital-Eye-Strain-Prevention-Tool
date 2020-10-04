@@ -26,23 +26,16 @@ async function restoreOptions() {
     const data = await browser.storage.local.get();
 
     // Notification mode setting
-    if (typeof data.notificationMode === 'undefined') {
-        document.settings.notificationMode.value = 1;
-    } else {
-        document.settings.notificationMode.value = data.notificationMode;
-    }
+    if (typeof data.notificationMode === 'undefined') document.settings.notificationMode.value = 1;
+    else document.settings.notificationMode.value = data.notificationMode;
 
     // Play chime setting
-    if (typeof data.playChime === 'undefined') {
-        document.settings.playChime.value = 1;
-    } else {
-        document.settings.playChime.value = data.playChime;
-    }
+    if (typeof data.playChime === 'undefined') document.settings.playChime.value = 1;
+    else document.settings.playChime.value = data.playChime;
 
     // Do Not Disturb setting
-    if (typeof data.tempDisabled === 'undefined') {
-        document.settings.tempDisabled.value = 0;
-    } else {
+    if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
+    else {
         document.settings.tempDisabled.value = data.tempDisabled;
         isDisabled = data.tempDisabled == 1;
     }

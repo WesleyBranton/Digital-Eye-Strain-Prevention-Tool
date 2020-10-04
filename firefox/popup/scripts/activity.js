@@ -7,9 +7,7 @@ document.getElementById('start').addEventListener('click', start);
 // Start the 20s countdown
 function start() {
     // Create timer
-    browser.alarms.create('countdown', {
-        delayInMinutes: 0.33
-    });
+    browser.alarms.create('countdown', { delayInMinutes: 0.33 });
     browser.alarms.onAlarm.addListener(timerTrigger);
     
     // Update GUI
