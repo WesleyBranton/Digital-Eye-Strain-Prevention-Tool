@@ -4,14 +4,11 @@
 
 // Save options
 function saveOptions() {
-    // Notification mode setting
+    // Save settings
     browser.storage.local.set({
-        'notificationMode': parseInt(document.settings.notificationMode.value)
-    });
-    
-    // Do Not Disturb setting
-    browser.storage.local.set({
-        'tempDisabled': parseInt(document.settings.tempDisabled.value)
+        'notificationMode': parseInt(document.settings.notificationMode.value),
+        'tempDisabled': parseInt(document.settings.tempDisabled.value),
+        'playChime': parseInt(document.settings.playChime.value)
     });
     
     // Apply changes to Do Not Disturb setting
@@ -25,18 +22,30 @@ function saveOptions() {
 }
 
 // Prefill saved settings into option page
-function restoreOptions() {
+async function restoreOptions() {
+    const data = await browser.storage.local.get();
+
     // Notification mode setting
-    browser.storage.local.get('notificationMode', (res) => {
-        document.settings.notificationMode.value = res.notificationMode;
-    });
+    if (typeof data.notificationMode === 'undefined') {
+        document.settings.notificationMode.value = 1;
+    } else {
+        document.settings.notificationMode.value = data.notificationMode;
+    }
+
+    // Play chime setting
+    if (typeof data.playChime === 'undefined') {
+        document.settings.playChime.value = 1;
+    } else {
+        document.settings.playChime.value = data.playChime;
+    }
+
     // Do Not Disturb setting
-    browser.storage.local.get('tempDisabled', (res) => {
-        document.settings.tempDisabled.value = res.tempDisabled;
-        if (res.tempDisabled == 1) {
-            isDisabled = true;
-        }
-    });
+    if (typeof data.tempDisabled === 'undefined') {
+        document.settings.tempDisabled.value = 0;
+    } else {
+        document.settings.tempDisabled.value = data.tempDisabled;
+        isDisabled = data.tempDisabled == 1;
+    }
 }
 
 var isDisabled = false;

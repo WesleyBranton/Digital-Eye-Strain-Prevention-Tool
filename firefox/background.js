@@ -43,13 +43,19 @@ async function checkTimer() {
 function handleAlarm(alarmInfo) {
     var trigger = alarmInfo.name;
     if (trigger == 'enablepopup') {
-        browser.storage.local.get('notificationMode', (res) => {
+        browser.storage.local.get((res) => {
             if (res.notificationMode == 0) {
                 // Display browser notification
                 notify();
-            } else {
+            } else if (res.notificationMode == 1) {
                 // Display popup
                 open('main');
+            }
+
+            // Play chime (if enabled)
+            if (res.playChime == 1) {
+                const chime = new Audio('audio/chime.ogg');
+                chime.play();
             }
         });
         activityWaiting();
