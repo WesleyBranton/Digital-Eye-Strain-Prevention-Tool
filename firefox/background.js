@@ -2,13 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-// Check if user has set a notification type
-browser.storage.local.get('notificationMode', (res) => {
-    if (typeof res.notificationMode === 'undefined') {
-        firstRun();
-    }
-});
-
 var openWindow;
 let activityPending = false;
 enableTimer();
@@ -44,16 +37,16 @@ function handleAlarm(alarmInfo) {
     var trigger = alarmInfo.name;
     if (trigger == 'enablepopup') {
         browser.storage.local.get((res) => {
-            if (res.notificationMode == 0) {
-                // Display browser notification
-                notify();
-            } else if (res.notificationMode == 1) {
+            if (typeof res.notificationMode === 'undefined' || res.notificationMode == 1) {
                 // Display popup
                 open('main');
+            } else if (res.notificationMode == 0) {
+                // Display browser notification
+                notify();
             }
 
             // Play chime (if enabled)
-            if (res.playChime == 1) {
+            if (typeof res.playChime === 'undefined' || res.playChime == 1) {
                 const chime = new Audio('audio/chime.ogg');
                 chime.play();
             }
@@ -137,13 +130,6 @@ function getMessage(msg) {
     }
     var random = Math.floor(Math.random() * Math.floor(messages.length));
     return messages[random];
-}
-
-// Initialize nofitication type
-function firstRun() {
-    browser.storage.local.set({
-        notificationMode: 1
-    });
 }
 
 async function disableTimer() {
