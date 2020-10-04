@@ -10,12 +10,12 @@ browser.storage.local.get('notificationMode', (res) => {
 });
 
 var openWindow;
-startCountdown();
+enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
 chrome.runtime.onMessage.addListener(handleMessages);
 browser.windows.onRemoved.addListener((windowId) => {
     if (windowId == openWindow) {
-        startCountdown();
+        enableTimer();
     }
 });
 browser.notifications.onClicked.addListener(function(notificationId) {
@@ -26,12 +26,15 @@ browser.notifications.onClosed.addListener(function(notificationId) {
 });
 browser.storage.local.set({'tempDisabled': 0});
 browser.runtime.onInstalled.addListener(handleInstalled);
+browser.tabs.onUpdated.addListener(checkTimer);
 
-// Create timer
-function startCountdown() {
-    browser.alarms.create('enablepopup', {
-        delayInMinutes: 20
-    });
+// Check that alarm is valid
+async function checkTimer() {
+    const alarm = await browser.alarms.get('enablepopup');
+    const alarmTime = alarm.scheduledTime;
+    const currentTime = new Date().getTime();
+
+    if (alarmTime < currentTime || (alarmTime - currentTime) > 1200000) enableTimer();
 }
 
 // Handle timer trigger
@@ -93,7 +96,7 @@ function notificationClick(notificationId) {
 function notificationClosed(notificationId) {
     if (notificationId == 'eye-notification') {
         // Restart timer
-        startCountdown();
+        enableTimer();
     } else if (notificationId == 'eye-minimized') {
         // Maximize popup
         browser.windows.update(openWindow, {
@@ -134,13 +137,17 @@ function firstRun() {
     });
 }
 
+async function disableTimer() {
+    return await browser.alarms.clear('enablepopup');
+}
+
+async function enableTimer() {
+    return await browser.alarms.create('enablepopup', { delayInMinutes: 20 });
+}
+
 // Handle browser messages
 function handleMessages(msgCode) {
-    if (msgCode == 'disabletimer') {
-        browser.alarms.clear('enablepopup');
-    } else if (msgCode == 'enabletimer') {
-        startCountdown();
-    } else {
-        openWindow = msgCode;
-    }
+    if (msgCode == 'disabletimer') disableTimer();
+    else if (msgCode == 'enabletimer') enableTimer();
+    else openWindow = msgCode;
 }
