@@ -33,24 +33,25 @@ async function checkTimer() {
 }
 
 // Handle timer trigger
-function handleAlarm(alarmInfo) {
+async function handleAlarm(alarmInfo) {
     var trigger = alarmInfo.name;
     if (trigger == 'enablepopup') {
-        browser.storage.local.get((res) => {
-            if (typeof res.notificationMode === 'undefined' || res.notificationMode == 1) {
-                // Display popup
-                open('main');
-            } else if (res.notificationMode == 0) {
-                // Display browser notification
-                notify();
-            }
+        const data = await browser.storage.local.get();
+        
+        if (typeof data.notificationMode === 'undefined' || data.notificationMode == 1) {
+            // Display popup
+            open('main');
+        } else if (data.notificationMode == 0) {
+            // Display browser notification
+            notify();
+        }
 
-            // Play chime (if enabled)
-            if (typeof res.playChime === 'undefined' || res.playChime == 1) {
-                const chime = new Audio('audio/chime.ogg');
-                chime.play();
-            }
-        });
+        // Play chime (if enabled)
+        if (typeof data.playChime === 'undefined' || data.playChime == 1) {
+            const chime = new Audio('audio/chime.ogg');
+            chime.play();
+        }
+        
         activityWaiting();
     }
 }
