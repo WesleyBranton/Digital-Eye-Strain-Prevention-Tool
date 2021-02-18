@@ -17,30 +17,4 @@ To develop and test the extension, you need to open the "about:debugging" page i
 Further documentation about developing Firefox extensions can be found [here](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension).
 
 ## Release Notes
-### Version 2.1
-* **[NEW]** Added toolbar button
-* **[NEW]** Added chime sound effect
-* **[FIXED]** Improved timing reliability
-* **[CHANGED]** Performance optimizations
-
-### Version 2.0.2
-* **[FIXED]** Fixed issue where settings won't save
-
-### Version 2.0.1
-* **[CHANGE]** Overhauled options UI
-
-### Version 2.0
-* **[NEW]** Users can now select browser notifications instead of popup
-* **[NEW]** Users can now minimize popup temporarily
-* **[NEW]** Added "Do Not Disturb" mode
-* **[NEW]** 20s countdown no longer starts automatically
-* **[FIXED]** Fixed issue with popup not displaying
-* **[CHANGED]** Colour of flashing screen changed
-* **[CHANGED]** Changes to the UI styling
-
-### Version 1.1.1
-* **[FIXED]** Text render error
-
-### Version 1.1
-* **[FIXED]** Script link issue
-* **[FIXED]** Timer errors
+Release notes can be found on [this GitHub repository](https://github.com/WesleyBranton/Digital-Eye-Strain-Prevention-Tool/releases) or [the Firefox add-ons listing](https://addons.mozilla.org/firefox/addon/eye-strain-prevention-tool/versions/).
