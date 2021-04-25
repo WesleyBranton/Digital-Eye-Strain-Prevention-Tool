@@ -149,6 +149,7 @@ function activityFinished() {
     activityPending = false;
     browser.browserAction.setIcon({ path: 'icons/browserAction/disabled.png' });
     browser.browserAction.setBadgeText({ text: '' });
+    enableTimer();
 }
 
 // Add activity to queue
