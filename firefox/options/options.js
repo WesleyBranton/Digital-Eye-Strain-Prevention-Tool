@@ -6,10 +6,18 @@
 function saveOptions() {
     // Save settings
     browser.storage.local.set({
-        'notificationMode': parseInt(document.settings.notificationMode.value),
-        'tempDisabled': parseInt(document.settings.tempDisabled.value),
-        'playChime': parseInt(document.settings.playChime.value)
+        notificationMode: parseInt(document.settings.notificationMode.value),
+        tempDisabled: parseInt(document.settings.tempDisabled.value),
+        playChime: parseInt(document.settings.playChime.value)
     });
+
+    // Handle optional permissions for browser notifications
+    if (parseInt(document.settings.notificationMode.value) == 0) {
+        browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+    } else {
+        browser.permissions.remove(notificationsPermissions);
+        processNotificationsPermissions(true);
+    }
     
     // Apply changes to Do Not Disturb setting
     if (document.settings.tempDisabled.value == 1) browser.runtime.sendMessage('disabletimer');
@@ -31,7 +39,34 @@ async function restoreOptions() {
     // Do Not Disturb setting
     if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
     else document.settings.tempDisabled.value = data.tempDisabled;
+
+    // Handle optional permissions for browser notifications
+    if (parseInt(document.settings.notificationMode.value) == 0) {
+        browser.permissions.contains(notificationsPermissions).then(processNotificationsPermissions);
+    }
 }
 
+/**
+ * Shows/Hides error messages for notifications permission
+ * @param {boolean} isAllowed
+ */
+function processNotificationsPermissions(isAllowed) {
+    const error = document.getElementById('error-notificationsPermissionMissing');
+    const trigger = document.getElementById('trigger-notificationsPermissionMissing');
+
+    if (isAllowed) {
+        error.classList.add('hidden');
+        trigger.classList.add('hidden');
+    } else {
+        console.warn('User has selected browser notifications mode without granting the required permissions');
+        error.classList.remove('hidden');
+        trigger.classList.remove('hidden');
+    }
+}
+
+const notificationsPermissions = { permissions: ['notifications'] };
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
+document.getElementById('trigger-notificationsPermissionMissing').addEventListener('click', () => {
+    browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+});
