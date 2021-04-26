@@ -12,6 +12,7 @@ browser.storage.local.set({ 'tempDisabled': 0 });
 browser.runtime.onInstalled.addListener(handleInstalled);
 browser.tabs.onUpdated.addListener(checkTimer);
 browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
+checkPermissions();
 
 // Check that alarm is valid
 async function checkTimer() {
@@ -142,6 +143,7 @@ function handleMessages(msgCode) {
 // Handle toolbar button click
 function handleBrowserActionClicked() {
     if (activityPending) open('activity');
+    else browser.runtime.openOptionsPage();
 }
 
 // End activity
@@ -157,4 +159,16 @@ function activityWaiting() {
     activityPending = true;
     browser.browserAction.setIcon({ path: 'icons/browserAction/active.gif' });
     browser.browserAction.setBadgeText({ text: ' ! ' });
+}
+
+// Checks that the required optional permissions are enabled
+async function checkPermissions() {
+    const settings = await browser.storage.local.get();
+    if (settings.notificationMode === 0) {
+        if (!(await browser.permissions.contains({ permissions: ['notifications'] }))) {
+            browser.tabs.create({
+                url: 'error/missingPermissions.html'
+            });
+        }
+    }
 }

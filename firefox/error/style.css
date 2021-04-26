@@ -1,0 +1,58 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https: //mozilla.org/MPL/2.0/. */
+
+body {
+    background: #262626;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.wrapper {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 1em 2em;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 5em;
+}
+
+p {
+    text-align: left;
+}
+
+button {
+    border: none;
+    padding: 10px 30px;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 100px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: ease all 0.5s;
+    box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
+}
+
+#grantPermission {
+    color: white;
+    background-color: #00CC66;
+    background-image: linear-gradient(#00CC66,#00994D);
+}
+
+#viewOptions {
+    margin-top: 0.5em;
+    color: white;
+    background-color: #48AAD7;
+    background-image: linear-gradient(#48AAD7,#0E8BAF);
+    font-size: 80%;
+}
+
+#errorGranting {
+    color: red;
+    margin-top: 0.5em;
+}

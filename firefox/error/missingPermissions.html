@@ -1,0 +1,32 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Action Required - Digital Eye Strain Prevention Tool</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="../icons/icon-32.png">
+    </head>
+    <body>
+        <section class="wrapper">
+            <img src="../icons/icon-64.png" alt="Digital Eye Strain Prevention Tool">
+            <h2>Action Required</h2>
+            <p>The <i>Digital Eye Strain Prevention Tool</i> requires permission to create browser notifications. Please grant this permission or change your the add-on options to use a different notification mode.</p>
+            <div id="notGranted">
+                <button id="grantPermission">Grant Permission</button>
+                <br>
+                <button id="viewOptions">Open Options</button>
+            </div>
+            <div id="errorGranting" class="hidden">
+                The permission has still not been granted. Please try again.
+            </div>
+            <div id="granted" class="hidden">
+                <h3>You can now close this page</h3>
+            </div>
+        </section>
+        <script src="script.js"></script>
+    </body>
+</html>
