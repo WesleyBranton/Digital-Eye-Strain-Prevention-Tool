@@ -143,6 +143,7 @@ function handleMessages(msgCode) {
 // Handle toolbar button click
 function handleBrowserActionClicked() {
     if (activityPending) open('activity');
+    else browser.runtime.openOptionsPage();
 }
 
 // End activity
