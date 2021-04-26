@@ -113,7 +113,7 @@ section p {
 }
 
 /* Override hover effect for non-recommended option */
-.button.hidden: hover, .button: disabled: hover {
+.button.hidden:hover, .button:disabled:hover {
     filter: none !important;
 }
 
