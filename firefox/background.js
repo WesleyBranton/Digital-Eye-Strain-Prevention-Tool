@@ -8,8 +8,6 @@ enableTimer();
 browser.alarms.onAlarm.addListener(handleAlarm);
 browser.runtime.onMessage.addListener(handleMessages);
 browser.windows.onRemoved.addListener((wID) => { if (wID == openWindow) enableTimer(); });
-browser.notifications.onClicked.addListener((nID) => { notificationClick(nID); });
-browser.notifications.onClosed.addListener((nID) => { notificationClosed(nID); });
 browser.storage.local.set({ 'tempDisabled': 0 });
 browser.runtime.onInstalled.addListener(handleInstalled);
 browser.tabs.onUpdated.addListener(checkTimer);
@@ -59,18 +57,27 @@ function open(page) {
 }
 
 // Create browser notification
-function notify() {
-    browser.notifications.create('eye-notification',{
-        'type': 'basic',
-        'iconUrl': browser.extension.getURL('icons/icon-96.png'),
-        'title': getMessage('title'),
-        'message': getMessage('message') + '\n\nClick here to get started...'
-    });
+async function notify() {
+    if (await browser.permissions.contains({ permissions: ['notifications'] })) {
+        browser.notifications.onClicked.addListener(notificationClick);
+        browser.notifications.onClosed.addListener(notificationClosed);
+        browser.notifications.create('eye-notification', {
+            type: 'basic',
+            iconUrl: browser.extension.getURL('icons/icon-96.png'),
+            title: getMessage('title'),
+            message: getMessage('message') + '\n\nClick here to get started...'
+        });
+    } else {
+        console.error('User has not granted permission to create browser notifications');
+    }
 }
 
 // Handle browser notification click
 function notificationClick(notificationId) {
     if (notificationId == 'eye-notification') open('activity');
+
+    browser.notifications.onClicked.removeListener(notificationClick);
+    browser.notifications.onClosed.removeListener(notificationClosed);
 }
 
 // Handle browser notification close
@@ -85,12 +92,17 @@ function notificationClosed(notificationId) {
             focused: true
         });
     }
+
+    browser.notifications.onClicked.removeListener(notificationClick);
+    browser.notifications.onClosed.removeListener(notificationClosed);
 }
 
 // Generate random notification messages
 function getMessage(msg) {
+    let messages;
+
     if (msg == 'title') {
-        const messages = [
+        messages = [
             "It's time to protect your eyes!",
             "Hey! Look over here!",
             "Yours eyes are super important!",
@@ -99,7 +111,7 @@ function getMessage(msg) {
             "Healthy eyes are happy eyes!"
         ];
     } else if (msg == 'message') {
-        const messages = [
+        messages = [
             "You've been looking at your screen for a long time. Let's give your eyes a break.",
             "You are reading this message thanks to your eyes. Show them some appreciation by doing this short exercise to prevent digital eye strain.",
             "You look like you're being really productive right now. Let's take a short break to protect your eyes.",
@@ -137,6 +149,7 @@ function activityFinished() {
     activityPending = false;
     browser.browserAction.setIcon({ path: 'icons/browserAction/disabled.png' });
     browser.browserAction.setBadgeText({ text: '' });
+    enableTimer();
 }
 
 // Add activity to queue
