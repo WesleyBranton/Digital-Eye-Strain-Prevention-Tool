@@ -5,3 +5,12 @@
 .hidden {
     display: none !important;
 }
+
+#chimeVolumeContainer {
+    display: flex;
+    align-items: center;
+}
+
+#chimeVolumeLabel {
+    margin-right: 1em;
+}

@@ -8,7 +8,8 @@ function saveOptions() {
     browser.storage.local.set({
         notificationMode: parseInt(document.settings.notificationMode.value),
         tempDisabled: parseInt(document.settings.tempDisabled.value),
-        playChime: parseInt(document.settings.playChime.value)
+        playChime: parseInt(document.settings.playChime.value),
+        chimeVolume: document.settings.chimeVolume.value / 100
     });
 
     // Handle optional permissions for browser notifications
@@ -22,6 +23,8 @@ function saveOptions() {
     // Apply changes to Do Not Disturb setting
     if (document.settings.tempDisabled.value == 1) browser.runtime.sendMessage('disabletimer');
     else browser.runtime.sendMessage('enabletimer');
+
+    updateUI();
 }
 
 // Prefill saved settings into option page
@@ -36,6 +39,11 @@ async function restoreOptions() {
     if (typeof data.playChime === 'undefined') document.settings.playChime.value = 1;
     else document.settings.playChime.value = data.playChime;
 
+    // Chime volume setting
+    if (typeof data.chimeVolume === 'undefined') document.settings.chimeVolume.value = 100;
+    else document.settings.chimeVolume.value = data.chimeVolume * 100;
+    document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
+
     // Do Not Disturb setting
     if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
     else document.settings.tempDisabled.value = data.tempDisabled;
@@ -44,6 +52,8 @@ async function restoreOptions() {
     if (parseInt(document.settings.notificationMode.value) == 0) {
         browser.permissions.contains(notificationsPermissions).then(processNotificationsPermissions);
     }
+
+    updateUI();
 }
 
 /**
@@ -64,9 +74,26 @@ function processNotificationsPermissions(isAllowed) {
     }
 }
 
+// Update the UI based on the current settings
+function updateUI() {
+    const chimeVolumeSection = document.getElementById('chimeVolumeSection');
+    const chimeVolumeDivider = document.getElementById('chimeVolumeDivider');
+
+    if (parseInt(document.settings.playChime.value) == 1) {
+        chimeVolumeSection.classList.remove('hidden');
+        chimeVolumeDivider.classList.remove('hidden');
+    } else {
+        chimeVolumeSection.classList.add('hidden');
+        chimeVolumeDivider.classList.add('hidden');
+    }
+}
+
 const notificationsPermissions = { permissions: ['notifications'] };
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
 document.getElementById('trigger-notificationsPermissionMissing').addEventListener('click', () => {
     browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+});
+document.settings.chimeVolume.addEventListener('change', () => {
+    document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
 });
