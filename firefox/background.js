@@ -4,7 +4,9 @@
 
 let openWindow;
 let activityPending = false;
+const chime = new Audio('audio/chime.ogg');
 enableTimer();
+loadStorage();
 browser.alarms.onAlarm.addListener(handleAlarm);
 browser.runtime.onMessage.addListener(handleMessages);
 browser.windows.onRemoved.addListener((wID) => { if (wID == openWindow) enableTimer(); });
@@ -12,6 +14,7 @@ browser.storage.local.set({ 'tempDisabled': 0 });
 browser.runtime.onInstalled.addListener(handleInstalled);
 browser.tabs.onUpdated.addListener(checkTimer);
 browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
+browser.storage.onChanged.addListener(handleStorageChange);
 checkPermissions();
 
 // Check that alarm is valid
@@ -34,7 +37,6 @@ async function handleAlarm(alarmInfo) {
 
         // Play chime (if enabled)
         if (typeof data.playChime === 'undefined' || data.playChime == 1) {
-            const chime = new Audio('audio/chime.ogg');
             chime.play();
         }
         
@@ -169,6 +171,26 @@ async function checkPermissions() {
             browser.tabs.create({
                 url: 'error/missingPermissions.html'
             });
+        }
+    }
+}
+
+// Load the Storage API to init data
+async function loadStorage() {
+    const data = await browser.storage.local.get();
+
+    if (typeof data.chimeVolume == 'number') {
+        chime.volume = data.chimeVolume;
+    } else {
+        chime.volume = 1;
+    }
+}
+
+// Handle changes to the Storage API
+function handleStorageChange(changes, area) {
+    for (c of Object.keys(changes)) {
+        if (c == 'chimeVolume') {
+            chime.volume = changes[c].newValue;
         }
     }
 }
