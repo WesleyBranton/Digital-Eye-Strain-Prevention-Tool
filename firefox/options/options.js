@@ -88,6 +88,13 @@ function updateUI() {
     }
 }
 
+// Preview chime
+function previewChime() {
+    const chime = new Audio('../audio/chime.ogg');
+    chime.volume = document.settings.chimeVolume.value / 100;
+    chime.play();
+}
+
 const notificationsPermissions = { permissions: ['notifications'] };
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
@@ -97,3 +104,4 @@ document.getElementById('trigger-notificationsPermissionMissing').addEventListen
 document.settings.chimeVolume.addEventListener('change', () => {
     document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
 });
+document.getElementById('chimePreview').addEventListener('click', previewChime);
