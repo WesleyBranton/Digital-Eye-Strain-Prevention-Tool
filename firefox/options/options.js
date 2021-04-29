@@ -21,8 +21,13 @@ function saveOptions() {
     }
     
     // Apply changes to Do Not Disturb setting
-    if (document.settings.tempDisabled.value == 1) browser.runtime.sendMessage('disabletimer');
-    else browser.runtime.sendMessage('enabletimer');
+    if (document.settings.tempDisabled.value == 1) {
+        browser.runtime.sendMessage('disabletimer');
+        browser.browserAction.setBadgeText({ text: 'OFF' });
+    } else {
+        browser.runtime.sendMessage('enabletimer');
+        browser.browserAction.setBadgeText({ text: '' });
+    }
 
     updateUI();
 }
