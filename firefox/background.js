@@ -46,8 +46,8 @@ async function handleAlarm(alarmInfo) {
 
 // Handles install/update
 function handleInstalled(details) {
-    if (details.reason == 'install') browser.tabs.create({ url: 'messages/new.html' });
-    else if (details.reason == 'update') browser.tabs.create({ url: 'messages/update.html' });
+    if (details.reason == 'install') browser.tabs.create({ url: 'https://addons.wesleybranton.com/addon/digital-eye-strain-prevention-tool/welcome/v1' });
+    else if (details.reason == 'update') browser.tabs.create({ url: 'https://addons.wesleybranton.com/addon/digital-eye-strain-prevention-tool/update/v2_2' });
 }
 
 // Open popup
