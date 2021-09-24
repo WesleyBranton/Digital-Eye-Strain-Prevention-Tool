@@ -8,13 +8,14 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="../lib/new_browser_style.css">
         <link rel="stylesheet" href="options.css">
+        <title>Digital Eye Strain Prevention Tool Options</title>
     </head>
     <body class="browser-style">
         <form name="settings">
             <section class="panel-section">
                 <div>
                     <label for="notificationMode">Notification Mode</label><br>
-                    <a id="trigger-notificationsPermissionMissing" class="hidden" href="#">Grant Permission</a>
+                    <span id="error-notificationsPermissionMissing" class="hidden">Using this notification mode requires additional permission - <a id="trigger-notificationsPermissionMissing">Grant Permission</a></span>
                 </div>
                 <select name="notificationMode">
                     <option value="0">Browser Notification</option>
@@ -22,7 +23,9 @@
                     <option value="2">None</option>
                 </select>
             </section>
+
             <div class="panel-section-separator"></div>
+
             <section class="panel-section">
                 <label for="playChime">Play Chime</label>
                 <div>
@@ -30,7 +33,9 @@
                     <label><input type="radio" name="playChime" value="0"> No</label>
                 </div>
             </section>
+
             <div id="chimeVolumeDivider" class="panel-section-separator hidden"></div>
+
             <section id="chimeVolumeSection" class="panel-section hidden">
                 <label for="chimeVolume">Chime Volume</label>
                 <div id="chimeVolumeContainer">
@@ -39,7 +44,23 @@
                     <button id="chimePreview" type="button" class="default micro" title="Preview Chime">&#11208;</button>
                 </div>
             </section>
+
             <div class="panel-section-separator"></div>
+
+            <section class="panel-section">
+                <div>
+                    <label for="autoPause">Automatically Pause Media In Tabs</label>
+                    <span id="error-autoPausePermissionMissing" class="hidden">This feature requires additional permissions - <a id="trigger-autoPausePermissionMissing">Grant Permissions</a></span>
+                </div>
+                <div>
+                    <label><input type="radio" name="autoPause" value="2"> All Tabs</label><br>
+                    <label><input type="radio" name="autoPause" value="1"> Active Tabs</label><br>
+                    <label><input type="radio" name="autoPause" value="0"> No</label>
+                </div>
+            </section>
+
+            <div class="panel-section-separator"></div>
+
             <section class="panel-section has-help">
                 <label>Do Not Disturb Mode</label>
                 <div>
@@ -47,14 +68,10 @@
                     <label><input type="radio" name="tempDisabled" value="1"> Active</label>
                 </div>
             </section>
+
             <section class="panel-section help-row">
                 Allows you to temporarily disable all reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage.
             </section>
-            <section class="panel-section">
-                <div>
-                  <div id="error-notificationsPermissionMissing" class="message-bar error hidden">Using the browser notification mode requires additional permissions.</div>
-                </div>
-              </section>
         </form>
         <script src="options.js"></script>
     </body>

@@ -51,7 +51,8 @@ function handleInstalled(details) {
 }
 
 // Open popup
-function open(page) {
+async function open(page) {
+    await pauseMedia();
     browser.windows.create({
         'url': browser.extension.getURL('popup/' + page + '.html'),
         'state': 'fullscreen',
@@ -192,5 +193,43 @@ function handleStorageChange(changes, area) {
         if (c == 'chimeVolume') {
             chime.volume = changes[c].newValue;
         }
+    }
+}
+
+// Pause media in user's tabs
+async function pauseMedia() {
+    const settings = await browser.storage.local.get("autoPause");
+
+    if (typeof settings.autoPause == 'undefined' || settings.autoPause == 0) {
+        return;
+    }
+
+    if (await browser.permissions.contains({ permissions: ['tabs'], origins: ['<all_urls>'] })) {
+        const allTabs = settings.autoPause == 2;
+        const tabQuery = {};
+
+        if (!allTabs) {
+            tabQuery['active'] = true;
+        }
+
+        const tabs = await browser.tabs.query(tabQuery);
+
+        for (const tab of tabs) {
+            browser.tabs.executeScript(tab.id, {
+                allFrames: true,
+                code: "for (v of document.getElementsByTagName('video')) { v.pause(); }",
+                runAt: "document_idle"
+            });
+        }
+
+        for (const tab of tabs) {
+            browser.tabs.executeScript(tab.id, {
+                allFrames: true,
+                code: "for (a of document.getElementsByTagName('audio')) { a.pause(); }",
+                runAt: "document_idle"
+            });
+        }
+    } else {
+        console.warn('User has not granted permissions required to pause media in tabs');
     }
 }

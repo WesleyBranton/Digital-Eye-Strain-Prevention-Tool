@@ -18,3 +18,9 @@
 #chimePreview {
     margin-left: 1em;
 }
+
+#error-autoPausePermissionMissing,
+#error-notificationsPermissionMissing {
+    color: red;
+    display: block;
+}
