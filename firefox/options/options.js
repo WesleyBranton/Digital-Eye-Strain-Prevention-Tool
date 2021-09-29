@@ -8,17 +8,10 @@ function saveOptions() {
     browser.storage.local.set({
         notificationMode: parseInt(document.settings.notificationMode.value),
         tempDisabled: parseInt(document.settings.tempDisabled.value),
+        autoPause: parseInt(document.settings.autoPause.value),
         playChime: parseInt(document.settings.playChime.value),
         chimeVolume: document.settings.chimeVolume.value / 100
     });
-
-    // Handle optional permissions for browser notifications
-    if (parseInt(document.settings.notificationMode.value) == 0) {
-        browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
-    } else {
-        browser.permissions.remove(notificationsPermissions);
-        processNotificationsPermissions(true);
-    }
     
     // Apply changes to Do Not Disturb setting
     if (document.settings.tempDisabled.value == 1) {
@@ -53,12 +46,43 @@ async function restoreOptions() {
     if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
     else document.settings.tempDisabled.value = data.tempDisabled;
 
-    // Handle optional permissions for browser notifications
+    // Auto pause setting
+    if (typeof data.autoPause === 'undefined') document.settings.autoPause.value = 0;
+    else document.settings.autoPause.value = data.autoPause;
+
+    checkPermissions();
+    updateUI();
+}
+
+/**
+ * Check all optional permissions and trigger UI updates
+ */
+function checkPermissions() {
     if (parseInt(document.settings.notificationMode.value) == 0) {
         browser.permissions.contains(notificationsPermissions).then(processNotificationsPermissions);
     }
 
-    updateUI();
+    browser.permissions.contains(autoPausePermissions).then(processAutoPausePermissions);
+}
+
+/**
+ * Shows/Hides error messages for auto pause feature permissions
+ * @param {boolean} allowed 
+ */
+function processAutoPausePermissions(allowed) {
+    const error = document.getElementById('error-autoPausePermissionMissing');
+    const inputs = document.getElementsByName('autoPause');
+
+    if (allowed) {
+        error.classList.add('hidden');
+    } else {
+        error.classList.remove('hidden');
+        document.settings.autoPause.value = 0;
+    }
+
+    for (input of inputs) {
+        input.disabled = !allowed;
+    }
 }
 
 /**
@@ -67,15 +91,12 @@ async function restoreOptions() {
  */
 function processNotificationsPermissions(isAllowed) {
     const error = document.getElementById('error-notificationsPermissionMissing');
-    const trigger = document.getElementById('trigger-notificationsPermissionMissing');
 
     if (isAllowed) {
         error.classList.add('hidden');
-        trigger.classList.add('hidden');
     } else {
         console.warn('User has selected browser notifications mode without granting the required permissions');
         error.classList.remove('hidden');
-        trigger.classList.remove('hidden');
     }
 }
 
@@ -101,12 +122,28 @@ function previewChime() {
 }
 
 const notificationsPermissions = { permissions: ['notifications'] };
+const autoPausePermissions = { permissions: ['tabs'], origins: ['<all_urls>'] };
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
+document.settings.notificationMode.addEventListener('change', () => {
+    // Handle optional permissions for browser notifications
+    if (parseInt(document.settings.notificationMode.value) == 0) {
+        browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+    } else {
+        browser.permissions.remove(notificationsPermissions);
+        processNotificationsPermissions(true);
+    }
+});
 document.getElementById('trigger-notificationsPermissionMissing').addEventListener('click', () => {
     browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+});
+document.getElementById('trigger-autoPausePermissionMissing').addEventListener('click', () => {
+    browser.permissions.request(autoPausePermissions).then(processAutoPausePermissions);
 });
 document.settings.chimeVolume.addEventListener('change', () => {
     document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
 });
 document.getElementById('chimePreview').addEventListener('click', previewChime);
+browser.permissions.onAdded.addListener(checkPermissions);
+browser.permissions.onRemoved.addListener(checkPermissions);
+

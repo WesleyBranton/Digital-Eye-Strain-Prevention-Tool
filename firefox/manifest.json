@@ -39,6 +39,8 @@
     ],
 
     "optional_permissions": [
-        "notifications"
+        "notifications",
+        "tabs",
+        "<all_urls>"
     ]
 }
