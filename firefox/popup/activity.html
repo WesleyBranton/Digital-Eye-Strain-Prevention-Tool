@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>20-20-20 Rule</title>
+        <title data-i18n="activityTitle"></title>
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="../icons/icon-32.png">
     </head>
@@ -19,20 +19,21 @@
                 <td>
                     <section>
                         <div class="header-container"><img src="../images/header.png" id="header"></div>
-                        <h3 id="beforeMsg">Look at something at least 20 feet away until the timer stops</h3>
-                        <h3 id="afterMsg" style="display:none">You may now continue your browsing session by clicking the <i>Continue Browsing</i> button</h3>
+                        <h3 id="beforeMsg" data-i18n="descriptionActivityInstructions"></h3>
+                        <h3 id="afterMsg" style="display:none" data-i18n="descriptionActivityFinished" data-i18n-placeholders="buttonContinue"></h3>
                         <div class="countdown-container">
                             <h1 id="timer" class=""></h1>
                             <div id="timer-bar" class=""></div>
                         </div>
                         <div class="button-container">
-                            <button id="complete" class="button green" disabled style="display:none">Continue Browsing</button>
-                            <button id="start" class="button green">Start</button>
+                            <button id="complete" class="button green" disabled style="display:none" data-i18n="buttonContinue"></button>
+                            <button id="start" class="button green" data-i18n="buttonStart"></button>
                         </div>
                     </section>
                 </td>
             </tr>
         </table>
+        <script src="../lib/i18n_helper.js"></script>
         <script src="scripts/activity.js"></script>
     </body>
 </html>

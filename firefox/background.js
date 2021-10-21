@@ -102,29 +102,15 @@ function notificationClosed(notificationId) {
 }
 
 // Generate random notification messages
-function getMessage(msg) {
-    let messages;
+function getMessage(messageKey, numberKey) {
+    const number = parseInt(browser.i18n.getMessage(numberKey));
+    let random = 1;
 
-    if (msg == 'title') {
-        messages = [
-            "It's time to protect your eyes!",
-            "Hey! Look over here!",
-            "Yours eyes are super important!",
-            "Do you have 20 seconds to spare?",
-            "You have such beautiful eyes!",
-            "Healthy eyes are happy eyes!"
-        ];
-    } else if (msg == 'message') {
-        messages = [
-            "You've been looking at your screen for a long time. Let's give your eyes a break.",
-            "You are reading this message thanks to your eyes. Show them some appreciation by doing this short exercise to prevent digital eye strain.",
-            "You look like you're being really productive right now. Let's take a short break to protect your eyes.",
-            "Let's make sure your eyes stay top-notch. It only takes 20 seconds of your time.",
-            "Staring at your computer screen for long periods of time can lead to permanent damage. Let's prevent that with a short activity."
-        ];
+    if (!isNaN(number)) {
+        random = Math.floor((Math.random() * number) + 1);
     }
-    const random = Math.floor(Math.random() * Math.floor(messages.length));
-    return messages[random];
+
+    return browser.i18n.getMessage(messageKey + random);
 }
 
 async function disableTimer() {

@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
-    "name": "Digital Eye Strain Prevention Tool",
+    "name": "__MSG_extensionName__",
     "version": "2.2",
-    "description": "Prevent permanent damage to your eyes while browsing the web with this tool",
+    "description": "__MSG_extensionDescription__",
     "author": "Wesley Branton",
+    "default_locale": "en",
     
     "developer": {
         "name": "Wesley Branton",
@@ -25,7 +26,7 @@
         "default_icon": {
             "32": "icons/browserAction/disabled.png"
         },
-        "default_title": "Digital Eye Strain Prevention Tool"
+        "default_title": "__MSG_extensionName__"
     },
     
     "options_ui": {

@@ -2,6 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+i18nParse();
 sendWindowId();
 document.getElementById('start').addEventListener('click', loadStart);
 document.getElementById('later').addEventListener('click', doLater);
@@ -22,10 +23,10 @@ async function minimize() {
     const popup = await browser.windows.getCurrent();
     browser.windows.update(popup.id, { state: 'minimized' });
     browser.notifications.create('eye-minimized', {
-        'type': 'basic',
-        'iconUrl': browser.extension.getURL('icons/icon-96.png'),
-        'title': "You've delayed your eye activity!",
-        'message': 'Once you have wrapped up your work and are ready to take a break, click this notification...'
+        type: 'basic',
+        iconUrl: browser.extension.getURL('icons/icon-96.png'),
+        title: browser.i18n.getMessage('delayedNotificationTitle'),
+        message: browser.i18n.getMessage('delayedNotificationMessage')
     });
 }
 
