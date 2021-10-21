@@ -123,6 +123,7 @@ function previewChime() {
 
 const notificationsPermissions = { permissions: ['notifications'] };
 const autoPausePermissions = { permissions: ['tabs'], origins: ['<all_urls>'] };
+i18nParse();
 restoreOptions();
 document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
 document.settings.notificationMode.addEventListener('change', () => {

@@ -1,0 +1,174 @@
+{
+    "extensionName": {
+        "message": "Digital Eye Strain Prevention Tool"
+    },
+    "extensionNameShort": {
+        "message": "DESPT"
+    },
+    "extensionDescription": {
+        "message": "Prevent permanent damage to your eyes while browsing the web with this tool."
+    },
+
+    "optionsTitle": {
+        "message": "$EXTENSIONNAME$ Options",
+        "placeholders": {
+            "extensionname": {
+                "content": "$1"
+            }
+        }
+    },
+    "activityTitle": {
+        "message": "20-20-20 Rule"
+    },
+
+    "settingNotificationMode": {
+        "message": "Notification Mode"
+    },
+    "settingPlayChime": {
+        "message": "Play Chime"
+    },
+    "settingChimeVolume": {
+        "message": "Chime Volume"
+    },
+    "settingAutoPause": {
+        "message": "Automatically Pause Media In Tabs"
+    },
+    "settingTempDisabled": {
+        "message": "Do Not Disturb Mode"
+    },
+
+    "valueYes": {
+        "message": "Yes"
+    },
+    "valueNo": {
+        "message": "No"
+    },
+    "valueNone": {
+        "message": "None"
+    },
+    "valueNotification": {
+        "message": "Browser Notification"
+    },
+    "valuePopup": {
+        "message": "Fullscreen Popup"
+    },
+    "valueTabsAll": {
+        "message": "All Tabs"
+    },
+    "valueTabsActive": {
+        "message": "Active Tabs"
+    },
+    "valueActive": {
+        "message": "Active"
+    },
+    "valueInactive": {
+        "message": "Inactive"
+    },
+
+    "descriptionTempDisabled": {
+        "message": "Allows you to temporarily disable all reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage."
+    },
+
+    "actionGrantPermission": {
+        "message": "Grant Permission"
+    },
+    
+    "errorFeatureRequiresPermission": {
+        "message": "This feature requires additional permissions"
+    },
+    "errorNotificationRequiredPermission": {
+        "message": "Using this notification mode requires additional permission"
+    },
+
+    "buttonStart": {
+        "message": "Start"
+    },
+    "buttonLater": {
+        "message": "Maybe Later"
+    },
+    "buttonWait": {
+        "message": "Let Me Finish Something"
+    },
+    "buttonContinue": {
+        "message": "Continue Browsing"
+    },
+    "buttonYes": {
+        "message": "Yes"
+    },
+    "buttonNo": {
+        "message": "No"
+    },
+
+    "descriptionActivityIntro": {
+        "message": "Staring at your computer screen for long periods of time can strain your eyes and lead to permanent vision damage. This is why it's important to give your eyes a break. For every 20 minutes, you should focus on something at least 20 feet away for 20 seconds."
+    },
+    "descriptionActivityIntroAction": {
+        "message": "Press the start button and look away. Your computer will chime and the screen will flash when the 20 seconds is up."
+    },
+    "descriptionRisks": {
+        "message": "Continuous exposure to your computer screen can cause irreversible damage to your eyes. It's highly recommended that you take a break."
+    },
+    "descriptionActivityInstructions": {
+        "message": "Look at something at least 20 feet away until the timer stops"
+    },
+    "descriptionActivityFinished": {
+        "message": "You may now continue your browsing session by clicking the \"$BUTTON$\" button",
+        "placeholders": {
+            "button": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "headingConfirm": {
+        "message": "Are you sure?"
+    },
+
+    "delayedNotificationTitle": {
+        "message": "You've delayed your eye activity!"
+    },
+    "delayedNotificationMessage": {
+        "message": "Once you have wrapped up your work and are ready to take a break, click this notification..."
+    },
+
+    "numberOfNotificationTitles": {
+        "message": "6"
+    },
+    "notificationTitle1": {
+        "message": "It's time to protect your eyes!"
+    },
+    "notificationTitle2": {
+        "message": "Hey! Look over here!"
+    },
+    "notificationTitle3": {
+        "message": "Yours eyes are super important!"
+    },
+    "notificationTitle4": {
+        "message": "Do you have 20 seconds to spare?"
+    },
+    "notificationTitle5": {
+        "message": "You have such beautiful eyes!"
+    },
+    "notificationTitle6": {
+        "message": "Healthy eyes are happy eyes!"
+    },
+
+    "numberOfNotificationMessages": {
+        "message": "5"
+    },
+    "notificationMessage1": {
+        "message": "You've been looking at your screen for a long time. Let's give your eyes a break."
+    },
+    "notificationMessage2": {
+        "message": "You are reading this message thanks to your eyes. Show them some appreciation by doing this short exercise to prevent digital eye strain."
+    },
+    "notificationMessage3": {
+        "message": "You look like you're being really productive right now. Let's take a short break to protect your eyes."
+    },
+    "notificationMessage4": {
+        "message": "Let's make sure your eyes stay top-notch. It only takes 20 seconds of your time."
+    },
+    "notificationMessage5": {
+        "message": "Staring at your computer screen for long periods of time can lead to permanent damage. Let's prevent that with a short activity."
+    }
+}

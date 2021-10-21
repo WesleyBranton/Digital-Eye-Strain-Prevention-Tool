@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>20-20-20 Rule</title>
+        <title data-i18n="activityTitle"></title>
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="../icons/icon-32.png">
     </head>
@@ -16,17 +16,18 @@
                 <td>
                     <section>
                         <div class="header-container"><img src="../images/header.png" id="header"></div>
-                        <p>Staring at your computer screen for long periods of time can strain your eyes and lead to permanent vision damage. This is why it's important to give your eyes a break. For every 20 minutes, you should focus on something at least 20 feet away for 20 seconds.</p>
-                        <p>Press the start button and look away. Your computer will chime and the screen will flash when the 20 seconds is up.</p>
+                        <p data-i18n="descriptionActivityIntro"></p>
+                        <p data-i18n="descriptionActivityIntroAction"></p>
                         <div class="button-container">
-                            <button id="start" class="button green">Start</button>
-                            <button id="later" class="button hidden">Maybe Later</button><br>
-                            <button id="wait" class="button hidden">Let Me Finish Something</button>
+                            <button id="start" class="button green" data-i18n="buttonStart"></button>
+                            <button id="later" class="button hidden" data-i18n="buttonLater"></button><br>
+                            <button id="wait" class="button hidden" data-i18n="buttonWait"></button>
                         </div>
                     </section>
                 </td>
             </tr>
         </table>
+        <script src="../lib/i18n_helper.js"></script>
         <script src="scripts/main.js"></script>
     </body>
 </html>

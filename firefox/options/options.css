@@ -19,8 +19,8 @@
     margin-left: 1em;
 }
 
-#error-autoPausePermissionMissing,
-#error-notificationsPermissionMissing {
+#error-autoPausePermissionMissing span,
+#error-notificationsPermissionMissing span {
     color: red;
     display: block;
 }

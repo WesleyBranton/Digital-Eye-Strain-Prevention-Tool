@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>20-20-20 Rule</title>
+        <title data-i18n="activityTitle"></title>
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="../icons/icon-32.png">
     </head>
@@ -16,16 +16,17 @@
                 <td>
                     <section>
                         <div class="header-container"><img src="../images/header.png" id="header"></div>
-                        <h1>Are you sure?</h1>
-                        <p>Continuous exposure to your computer screen can cause irreversible damage to your eyes. It's highly recommended that you take a break.</p>
+                        <h1 data-i18n="headingConfirm"></h1>
+                        <p data-i18n="descriptionRisks"></p>
                         <div class="button-container">
-                            <button id="goback" class="button red">No</button>
-                            <button id="close" class="button hidden">Yes</button>
+                            <button id="goback" class="button red" data-i18n="buttonNo"></button>
+                            <button id="close" class="button hidden" data-i18n="buttonYes"></button>
                         </div>
                     </section>
                 </td>
             </tr>
         </table>
+        <script src="../lib/i18n_helper.js"></script>
         <script src="scripts/confirm.js"></script>
     </body>
 </html>
