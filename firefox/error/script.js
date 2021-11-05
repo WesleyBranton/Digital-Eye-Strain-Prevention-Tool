@@ -24,5 +24,6 @@ function updateUI(granted) {
     }
 }
 
+i18nParse();
 document.getElementById('grantPermission').addEventListener('click', grantPermission);
 document.getElementById('viewOptions').addEventListener('click', openOptions);

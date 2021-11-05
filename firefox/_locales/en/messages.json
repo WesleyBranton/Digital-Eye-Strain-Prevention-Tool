@@ -20,6 +20,17 @@
     "activityTitle": {
         "message": "20-20-20 Rule"
     },
+    "titleExtensionNamePair": {
+        "message": "$TITLE$ - $EXTENSIONNAME$",
+        "placeholders": {
+            "title": {
+                "content": "$1"
+            },
+            "extensionname": {
+                "content": "$2"
+            }
+        }
+    },
 
     "settingNotificationMode": {
         "message": "Notification Mode"
@@ -72,12 +83,18 @@
     "actionGrantPermission": {
         "message": "Grant Permission"
     },
+    "actionOpenOptions": {
+        "message": "Open Options"
+    },
     
     "errorFeatureRequiresPermission": {
         "message": "This feature requires additional permissions"
     },
     "errorNotificationRequiredPermission": {
         "message": "Using this notification mode requires additional permission"
+    },
+    "errorPermissionStillMissing": {
+        "message": "The permission has still not been granted. Please try again."
     },
 
     "buttonStart": {
@@ -99,6 +116,14 @@
         "message": "No"
     },
 
+    "descriptionPermissionMissing": {
+        "message": "The $EXTENSIONNAME$ add-on requires permission to create browser notifications. Please grant this permission or change your the add-on options to use a different notification mode.",
+        "placeholders": {
+            "extensionname": {
+                "content": "$1"
+            }
+        }
+    },
     "descriptionActivityIntro": {
         "message": "Staring at your computer screen for long periods of time can strain your eyes and lead to permanent vision damage. This is why it's important to give your eyes a break. For every 20 minutes, you should focus on something at least 20 feet away for 20 seconds."
     },
@@ -122,6 +147,12 @@
 
     "headingConfirm": {
         "message": "Are you sure?"
+    },
+    "headingActionRequired": {
+        "message": "Action Required"
+    },
+    "headingClosePage": {
+        "message": "You can now close this page"
     },
 
     "delayedNotificationTitle": {
