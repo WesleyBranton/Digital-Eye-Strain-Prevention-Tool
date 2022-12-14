@@ -5,6 +5,7 @@
 let openWindow;
 let activityPending = false;
 const chime = new Audio('audio/chime.ogg');
+const webBase = 'https://addons.wesleybranton.com/addon/digital-eye-strain-prevention-tool';
 enableTimer();
 loadStorage();
 browser.alarms.onAlarm.addListener(handleAlarm);
@@ -16,6 +17,7 @@ browser.tabs.onUpdated.addListener(checkTimer);
 browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
 browser.storage.onChanged.addListener(handleStorageChange);
 checkPermissions();
+setUninstallPage();
 
 // Check that alarm is valid
 async function checkTimer() {
@@ -46,8 +48,8 @@ async function handleAlarm(alarmInfo) {
 
 // Handles install/update
 function handleInstalled(details) {
-    if (details.reason == 'install') browser.tabs.create({ url: 'https://addons.wesleybranton.com/addon/digital-eye-strain-prevention-tool/welcome/v1' });
-    else if (details.reason == 'update') browser.tabs.create({ url: 'https://addons.wesleybranton.com/addon/digital-eye-strain-prevention-tool/update/v2_2' });
+    if (details.reason == 'install') browser.tabs.create({ url: `${webBase}/welcome/v1` });
+    else if (details.reason == 'update') browser.tabs.create({ url: `${webBase}/update/v2_2` });
 }
 
 // Open popup
@@ -218,4 +220,36 @@ async function pauseMedia() {
     } else {
         console.warn('User has not granted permissions required to pause media in tabs');
     }
+}
+
+/**
+ * Set up uninstall page
+ */
+function setUninstallPage() {
+    getSystemDetails((details) => {
+        browser.runtime.setUninstallURL(`${webBase}/uninstall/?browser=${details.browser}&os=${details.os}&version=${details.version}`);
+    });
+}
+
+/**
+ * Send system details to callback
+ * @param {Function} callback
+ */
+function getSystemDetails(callback) {
+    browser.runtime.getPlatformInfo((platform) => {
+        callback({
+            browser: getBrowserName().toLowerCase(),
+            version: browser.runtime.getManifest().version,
+            os: platform.os
+        });
+    });
+}
+
+
+/**
+ * Get browser name
+ * @returns Browser name
+ */
+function getBrowserName() {
+    return 'FIREFOX';
 }
