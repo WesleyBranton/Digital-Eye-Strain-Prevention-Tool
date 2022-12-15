@@ -18,6 +18,8 @@ browser.browserAction.onClicked.addListener(handleBrowserActionClicked);
 browser.storage.onChanged.addListener(handleStorageChange);
 checkPermissions();
 setUninstallPage();
+checkQuietTime();
+browser.alarms.create('checkquiettime', { periodInMinutes: 0.5 });
 
 // Check that alarm is valid
 async function checkTimer() {
@@ -28,22 +30,78 @@ async function checkTimer() {
     if (alarmTime < currentTime || (alarmTime - currentTime) > 1200000) enableTimer();
 }
 
+/**
+ * Check if the add-on is currently in the quiet time schedule
+ * @returns Boolean
+ */
+async function isQuietTime() {
+    const now = new Date();
+    const nowWeekday = now.getDay();
+    const nowTime = (now.getHours() * 60) + now.getMinutes();
+
+    const data = await browser.storage.local.get(['scheduleEnabled', 'schedule']);
+
+    if (typeof data.scheduleEnabled == 'undefined' || data.scheduleEnabled == 0) {
+        return false;
+    }
+
+    if (typeof data.schedule == 'undefined' || typeof data.schedule[nowWeekday] == 'undefined') {
+        return false;
+    }
+
+    for (const t of data.schedule[nowWeekday]) {
+        if (nowTime >= t.start && nowTime <= t.end) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Check if the add-on is in quiet time
+ */
+async function checkQuietTime() {
+    const quietTime = await isQuietTime();
+
+    if (quietTime) {
+        browser.browserAction.setBadgeText({ text: 'OFF' });
+    } else {
+        browser.browserAction.setBadgeText({ text: '' });
+    }
+}
+
 // Handle timer trigger
 async function handleAlarm(alarmInfo) {
-    const trigger = alarmInfo.name;
-    if (trigger == 'enablepopup') {
-        const data = await browser.storage.local.get();
-        
-        if (typeof data.notificationMode === 'undefined' || data.notificationMode == 1) open('main');
-        else if (data.notificationMode == 0) notify();
-
-        // Play chime (if enabled)
-        if (typeof data.playChime === 'undefined' || data.playChime == 1) {
-            chime.play();
-        }
-        
-        activityWaiting();
+    switch (alarmInfo.name) {
+        case 'enablepopup':
+            handlePopupAlarm(alarmInfo);
+            break;
+        case 'checkquiettime':
+            checkQuietTime();
+            break;
     }
+}
+
+async function handlePopupAlarm(alarmInfo) {
+    const quietTime = await isQuietTime();
+    if (quietTime) {
+        await disableTimer();
+        await enableTimer();
+        return;
+    }
+
+    const data = await browser.storage.local.get();
+    
+    if (typeof data.notificationMode === 'undefined' || data.notificationMode == 1) open('main');
+    else if (data.notificationMode == 0) notify();
+
+    // Play chime (if enabled)
+    if (typeof data.playChime === 'undefined' || data.playChime == 1) {
+        chime.play();
+    }
+    
+    activityWaiting();
 }
 
 // Handles install/update
@@ -128,6 +186,7 @@ function handleMessages(msgCode) {
     if (msgCode == 'disabletimer') disableTimer();
     else if (msgCode == 'enabletimer') enableTimer();
     else if (msgCode == 'activityFinished') activityFinished();
+    else if (msgCode == 'checkQuietTime') checkQuietTime();
     else openWindow = msgCode;
 }
 
@@ -140,7 +199,7 @@ function handleBrowserActionClicked() {
 // End activity
 function activityFinished() {
     activityPending = false;
-    browser.browserAction.setIcon({ path: 'icons/browserAction/disabled.png' });
+    browser.browserAction.setIcon({ path: 'icons/browserAction/inactive.png' });
     browser.browserAction.setBadgeText({ text: '' });
     enableTimer();
 }

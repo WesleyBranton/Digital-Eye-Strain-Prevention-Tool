@@ -47,6 +47,9 @@
     "settingTempDisabled": {
         "message": "Do Not Disturb Mode"
     },
+    "settingSchedule": {
+        "message": "Quiet Time"
+    },
 
     "valueYes": {
         "message": "Yes"
@@ -76,8 +79,18 @@
         "message": "Inactive"
     },
 
+    "actionAdd": {
+        "message": "Add"
+    },
+    "actionDelete": {
+        "message": "Delete"
+    },
+
     "descriptionTempDisabled": {
         "message": "Allows you to temporarily disable all reminders until you restart Firefox. Running this mode for extended periods of time may leave you vulnerable to permanent eye damage."
+    },
+    "descriptionScheduleEnabled": {
+        "message": "When active, quiet time can be configured to prevent the activity from appearing during the selected times. For example, quiet time can be set to avoid seeing the activity while you are working."
     },
 
     "actionGrantPermission": {
@@ -201,5 +214,63 @@
     },
     "notificationMessage5": {
         "message": "Staring at your computer screen for long periods of time can lead to permanent damage. Let's prevent that with a short activity."
+    },
+
+    "monday": {
+        "message": "Monday"
+    },
+    "tuesday": {
+        "message": "Tuesday"
+    },
+    "wednesday": {
+        "message": "Wednesday"
+    },
+    "thursday": {
+        "message": "Thursday"
+    },
+    "friday": {
+        "message": "Friday"
+    },
+    "saturday": {
+        "message": "Saturday"
+    },
+    "sunday": {
+        "message": "Sunday"
+    },
+
+    "mondayShort": {
+        "message": "MON"
+    },
+    "tuesdayShort": {
+        "message": "TUE"
+    },
+    "wednesdayShort": {
+        "message": "WED"
+    },
+    "thursdayShort": {
+        "message": "THU"
+    },
+    "fridayShort": {
+        "message": "FRI"
+    },
+    "saturdayShort": {
+        "message": "SAT"
+    },
+    "sundayShort": {
+        "message": "SUN"
+    },
+
+    "between": {
+        "message": "between"
+    },
+    "and": {
+        "message": "and"
+    },
+
+    "errorStartTimeAfterEndTime": {
+        "message": "End time must be after start time"
+    },
+    "errorScheduleExists": {
+        "message": "This quiet time already exists"
     }
 }
