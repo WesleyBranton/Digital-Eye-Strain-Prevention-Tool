@@ -24,3 +24,42 @@
     color: red;
     display: block;
 }
+
+#schedule-display {
+    border-collapse: collapse;
+}
+
+#schedule-display td.weekday {
+    text-align: right;
+    padding-right: 0.5em;
+}
+
+#schedule-display td.time {
+    text-align: left;
+    width: 100%;
+    border: 1px solid var(--input-border-color);
+}
+
+#schedule-display .time-container {
+    position: relative;
+    height: 0.8em;
+}
+
+#schedule-display .bar {
+    height: 100%;
+    background: var(--button-primary-background);
+    border-radius: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#time-error {
+    color: red;
+    text-align: right;
+    margin-top: 0.5em;
+}
+
+.align-right {
+    text-align: right;
+}
