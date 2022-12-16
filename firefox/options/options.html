@@ -4,209 +4,212 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="../lib/new_browser_style.css">
-        <link rel="stylesheet" href="options.css">
-        <title data-i18n="optionsTitle" data-i18n-placeholders="extensionName"></title>
-        <link rel="icon" href="../icons/icon-32.png">
-    </head>
-    <body class="browser-style clickable-labels">
-        <form name="settings">
-            <section class="panel-section">
-                <div>
-                    <label for="notificationMode" data-i18n="settingNotificationMode"></label><br>
-                    <span id="error-notificationsPermissionMissing" class="hidden"><span data-i18n="errorNotificationRequiredPermission"></span> - <a id="trigger-notificationsPermissionMissing" data-i18n="actionGrantPermission"></a></span>
-                </div>
-                <select name="notificationMode">
-                    <option value="0" data-i18n="valueNotification"></option>
-                    <option value="1" data-i18n="valuePopup"></option>
-                    <option value="2" data-i18n="valueNone"></option>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../lib/new_browser_style.css">
+    <link rel="stylesheet" href="options.css">
+    <title data-i18n="optionsTitle" data-i18n-placeholders="extensionName"></title>
+    <link rel="icon" href="../icons/icon-32.png">
+</head>
+
+<body class="browser-style clickable-labels">
+    <form name="settings">
+        <section class="panel-section">
+            <div>
+                <label for="notificationMode" data-i18n="settingNotificationMode"></label><br>
+                <span id="error-notificationsPermissionMissing" class="hidden"><span data-i18n="errorNotificationRequiredPermission"></span> - <a id="trigger-notificationsPermissionMissing" data-i18n="actionGrantPermission"></a></span>
+            </div>
+            <select name="notificationMode">
+                <option value="0" data-i18n="valueNotification"></option>
+                <option value="1" data-i18n="valuePopup"></option>
+                <option value="2" data-i18n="valueNone"></option>
+            </select>
+        </section>
+
+        <div class="panel-section-separator"></div>
+
+        <section class="panel-section">
+            <label for="playChime" data-i18n="settingPlayChime"></label>
+            <div>
+                <input id="playChime-1" type="radio" name="playChime" value="1">
+                <label for="playChime-1" data-i18n="valueYes"></label>
+                <br>
+                <input id="playChime-2" type="radio" name="playChime" value="0">
+                <label for="playChime-2" data-i18n="valueNo"></label>
+            </div>
+        </section>
+
+        <div id="chimeVolumeDivider" class="panel-section-separator hidden"></div>
+
+        <section id="chimeVolumeSection" class="panel-section hidden">
+            <label for="chimeVolume" data-i18n="settingChimeVolume"></label>
+            <div id="chimeVolumeContainer">
+                <label id="chimeVolumeLabel">100%</label>
+                <input name="chimeVolume" type="range" min="0" max="100" step="1">
+                <button id="chimePreview" type="button" class="default micro" title="Preview Chime">&#11208;</button>
+            </div>
+        </section>
+
+        <div class="panel-section-separator"></div>
+
+        <section class="panel-section">
+            <div>
+                <label for="autoPause" data-i18n="settingAutoPause"></label>
+                <span id="error-autoPausePermissionMissing" class="hidden"><span data-i18n="errorFeatureRequiresPermission"></span> - <a id="trigger-autoPausePermissionMissing" data-i18n="actionGrantPermission"></a></span>
+            </div>
+            <div>
+                <input id="autoPause-2" type="radio" name="autoPause" value="2">
+                <label for="autoPause-2" data-i18n="valueTabsAll"></label>
+                <br>
+                <input id="autoPause-1" type="radio" name="autoPause" value="1">
+                <label for="autoPause-1" data-i18n="valueTabsActive"></label>
+                <br>
+                <input id="autoPause-0" type="radio" name="autoPause" value="0">
+                <label for="autoPause-0" data-i18n="valueNo"></label>
+            </div>
+        </section>
+
+        <div class="panel-section-separator"></div>
+
+        <section class="panel-section has-help">
+            <label for="tempDisabled" data-i18n="settingTempDisabled"></label>
+            <div>
+                <input id="tempDisabled-0" type="radio" name="tempDisabled" value="0">
+                <label for="tempDisabled-0" data-i18n="valueInactive"></label>
+                <br>
+                <input id="tempDisabled-1" type="radio" name="tempDisabled" value="1">
+                <label for="tempDisabled-1" data-i18n="valueActive"></label>
+            </div>
+        </section>
+
+        <section class="panel-section help-row">
+            <span data-i18n="descriptionTempDisabled"></span>
+        </section>
+
+        <div class="panel-section-separator"></div>
+
+        <section class="panel-section has-help">
+            <label for="scheduleEnabled" data-i18n="settingSchedule"></label>
+            <div>
+                <input id="scheduleEnabled-0" type="radio" name="scheduleEnabled" value="0">
+                <label for="scheduleEnabled-0" data-i18n="valueInactive"></label>
+                <br>
+                <input id="scheduleEnabled-1" type="radio" name="scheduleEnabled" value="1">
+                <label for="scheduleEnabled-1" data-i18n="valueActive"></label>
+            </div>
+        </section>
+
+        <section class="panel-section help-row">
+            <span data-i18n="descriptionScheduleEnabled"></span>
+        </section>
+    </form>
+
+    <section class="panel-section help-row">
+        <table id="schedule-display">
+            <tr>
+                <td class="weekday" data-i18n="sundayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="mondayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="tuesdayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="wednesdayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="thursdayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="fridayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="weekday" data-i18n="saturdayShort"></td>
+                <td class="time">
+                    <div class="time-container"></div>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="panel-section has-help help-row">
+        <div id="time-list" class="panel-section-list not-clickable"></div>
+    </section>
+
+    <section class="panel-section help-row">
+        <div></div>
+        <div>
+            <div>
+                <select id="time-weekday">
+                    <option value="0" data-i18n="sunday"></option>
+                    <option value="1" data-i18n="monday"></option>
+                    <option value="2" data-i18n="tuesday"></option>
+                    <option value="3" data-i18n="wednesday"></option>
+                    <option value="4" data-i18n="thursday"></option>
+                    <option value="5" data-i18n="friday"></option>
+                    <option value="6" data-i18n="saturday"></option>
                 </select>
-            </section>
-
-            <div class="panel-section-separator"></div>
-
-            <section class="panel-section">
-                <label for="playChime" data-i18n="settingPlayChime"></label>
-                <div>
-                    <input id="playChime-1" type="radio" name="playChime" value="1">
-                    <label for="playChime-1" data-i18n="valueYes"></label>
-                    <br>
-                    <input id="playChime-2" type="radio" name="playChime" value="0">
-                    <label for="playChime-2" data-i18n="valueNo"></label>
-                </div>
-            </section>
-
-            <div id="chimeVolumeDivider" class="panel-section-separator hidden"></div>
-
-            <section id="chimeVolumeSection" class="panel-section hidden">
-                <label for="chimeVolume" data-i18n="settingChimeVolume"></label>
-                <div id="chimeVolumeContainer">
-                    <label id="chimeVolumeLabel">100%</label>
-                    <input name="chimeVolume" type="range" min="0" max="100" step="1">
-                    <button id="chimePreview" type="button" class="default micro" title="Preview Chime">&#11208;</button>
-                </div>
-            </section>
-
-            <div class="panel-section-separator"></div>
-
-            <section class="panel-section">
-                <div>
-                    <label for="autoPause" data-i18n="settingAutoPause"></label>
-                    <span id="error-autoPausePermissionMissing" class="hidden"><span data-i18n="errorFeatureRequiresPermission"></span> - <a id="trigger-autoPausePermissionMissing" data-i18n="actionGrantPermission"></a></span>
-                </div>
-                <div>
-                    <input id="autoPause-2" type="radio" name="autoPause" value="2">
-                    <label for="autoPause-2" data-i18n="valueTabsAll"></label>
-                    <br>
-                    <input id="autoPause-1" type="radio" name="autoPause" value="1">
-                    <label for="autoPause-1" data-i18n="valueTabsActive"></label>
-                    <br>
-                    <input id="autoPause-0" type="radio" name="autoPause" value="0">
-                    <label for="autoPause-0" data-i18n="valueNo"></label>
-                </div>
-            </section>
-
-            <div class="panel-section-separator"></div>
-
-            <section class="panel-section has-help">
-                <label for="tempDisabled" data-i18n="settingTempDisabled"></label>
-                <div>
-                    <input id="tempDisabled-0" type="radio" name="tempDisabled" value="0">
-                    <label for="tempDisabled-0" data-i18n="valueInactive"></label>
-                    <br>
-                    <input id="tempDisabled-1" type="radio" name="tempDisabled" value="1">
-                    <label for="tempDisabled-1" data-i18n="valueActive"></label>
-                </div>
-            </section>
-
-            <section class="panel-section help-row">
-                <span data-i18n="descriptionTempDisabled"></span>
-            </section>
-
-            <div class="panel-section-separator"></div>
-
-            <section class="panel-section has-help">
-                <label for="scheduleEnabled" data-i18n="settingSchedule"></label>
-                <div>
-                    <input id="scheduleEnabled-0" type="radio" name="scheduleEnabled" value="0">
-                    <label for="scheduleEnabled-0" data-i18n="valueInactive"></label>
-                    <br>
-                    <input id="scheduleEnabled-1" type="radio" name="scheduleEnabled" value="1">
-                    <label for="scheduleEnabled-1" data-i18n="valueActive"></label>
-                </div>
-            </section>
-
-            <section class="panel-section help-row">
-                <span data-i18n="descriptionScheduleEnabled"></span>
-            </section>
-        </form>
-
-        <section class="panel-section help-row">
-            <table id="schedule-display">
-                <tr>
-                    <td class="weekday" data-i18n="sundayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="mondayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="tuesdayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="wednesdayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="thursdayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="fridayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="weekday" data-i18n="saturdayShort"></td>
-                    <td class="time">
-                        <div class="time-container"></div>
-                    </td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="panel-section has-help help-row">
-            <div id="time-list" class="panel-section-list not-clickable"></div>
-        </section>
-
-        <section class="panel-section help-row">
-            <div></div>
-            <div>
-                <div>
-                    <select id="time-weekday">
-                        <option value="0" data-i18n="sunday"></option>
-                        <option value="1" data-i18n="monday"></option>
-                        <option value="2" data-i18n="tuesday"></option>
-                        <option value="3" data-i18n="wednesday"></option>
-                        <option value="4" data-i18n="thursday"></option>
-                        <option value="5" data-i18n="friday"></option>
-                        <option value="6" data-i18n="saturday"></option>
-                    </select>
-                    <span data-i18n="between"></span>
-                    <select id="time-start-hour">
-                        <!-- Populated by options.js -->
-                    </select>
-                    <span>:</span>
-                    <select id="time-start-minute">
-                        <!-- Populated by options.js -->
-                    </select>
-                    <span data-i18n="and"></span>
-                    <select id="time-end-hour">
-                        <!-- Populated by options.js -->
-                    </select>
-                    <span>:</span>
-                    <select id="time-end-minute">
-                        <!-- Populated by options.js -->
-                    </select>
-                </div>
+                <span data-i18n="between"></span>
+                <select id="time-start-hour">
+                    <!-- Populated by options.js -->
+                </select>
+                <span>:</span>
+                <select id="time-start-minute">
+                    <!-- Populated by options.js -->
+                </select>
+                <span data-i18n="and"></span>
+                <select id="time-end-hour">
+                    <!-- Populated by options.js -->
+                </select>
+                <span>:</span>
+                <select id="time-end-minute">
+                    <!-- Populated by options.js -->
+                </select>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="panel-section help-row">
-            <div></div>
-            <div>
-                <div class="align-right">
-                    <button id="time-add" type="button" class="default">+ <span data-i18n="actionAdd"></span></button>
-                </div>
-                <div id="time-error"></div>
+    <section class="panel-section help-row">
+        <div></div>
+        <div>
+            <div class="align-right">
+                <button id="time-add" type="button" class="default">+ <span data-i18n="actionAdd"></span></button>
             </div>
-        </section>
+            <div id="time-error"></div>
+        </div>
+    </section>
 
-        <template id="template-time-list-item">
-            <div class="panel-list-item">
-                <div class="text"></div>
-                <div class="text-shortcut">
-                    <span class="text-label"></span>
-                    <button type="button" class="default micro">X</button>
-                </div>
+    <template id="template-time-list-item">
+        <div class="panel-list-item">
+            <div class="text"></div>
+            <div class="text-shortcut">
+                <span class="text-label"></span>
+                <button type="button" class="default micro">X</button>
             </div>
-        </template>
-        <script src="../lib/i18n_helper.js"></script>
-        <script src="options.js"></script>
-    </body>
+        </div>
+    </template>
+    <script src="../lib/i18n_helper.js"></script>
+    <script src="options.js"></script>
+</body>
+
 </html>

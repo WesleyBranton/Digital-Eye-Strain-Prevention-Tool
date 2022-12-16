@@ -4,34 +4,50 @@
 
 i18nParse();
 sendWindowId();
-document.getElementById('start').addEventListener('click', loadStart);
-document.getElementById('later').addEventListener('click', doLater);
+document.getElementById('start').addEventListener('click', start);
+document.getElementById('later').addEventListener('click', cancel);
 document.getElementById('wait').addEventListener('click', minimize);
 
-// Proceed to activity
-function loadStart() {
+/**
+ * Start activity
+ */
+function start() {
     window.location.href = 'activity.html';
 }
 
-// Proceed to cancel confirmation page
-function doLater() {
+/**
+ * Cancel activity
+ */
+function cancel() {
     window.location.href = 'confirm.html';
 }
 
-// Minimize window
-async function minimize() {
-    const popup = await browser.windows.getCurrent();
-    browser.windows.update(popup.id, { state: 'minimized' });
-    browser.notifications.create('eye-minimized', {
-        type: 'basic',
-        iconUrl: browser.extension.getURL('icons/icon-96.png'),
-        title: browser.i18n.getMessage('delayedNotificationTitle'),
-        message: browser.i18n.getMessage('delayedNotificationMessage')
+/**
+ * Minimize activity
+ */
+function minimize() {
+    browser.windows.getCurrent((window) => {
+        browser.windows.update(window.id, {
+            state: browser.windows.WindowState.MINIMIZED
+        }, () => {
+            browser.notifications.create('eye-minimized', {
+                type: 'basic',
+                iconUrl: browser.extension.getURL('icons/icon-96.png'),
+                title: browser.i18n.getMessage('delayedNotificationTitle'),
+                message: browser.i18n.getMessage('delayedNotificationMessage')
+            });
+        });
     });
 }
 
-// Send window ID to background.js
-async function sendWindowId() {
-    const popup = await browser.windows.getCurrent();
-    browser.runtime.sendMessage(popup.id);
+/**
+ * Send window ID to background script
+ */
+function sendWindowId() {
+    browser.windows.getCurrent((window) => {
+        browser.runtime.sendMessage({
+            command: 'updateWindowId',
+            windowId: window.id
+        });
+    });
 }

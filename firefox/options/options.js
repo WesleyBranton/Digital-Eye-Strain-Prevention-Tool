@@ -2,7 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-// Save options
+/**
+ * Save settings to Storage API
+ */
 function saveOptions() {
     // Save settings
     browser.storage.local.set({
@@ -14,57 +16,33 @@ function saveOptions() {
         scheduleEnabled: parseInt(document.settings.scheduleEnabled.value),
         schedule: saveSchedule()
     });
-    
-    // Apply changes to Do Not Disturb setting
-    if (document.settings.tempDisabled.value == 1) {
-        browser.runtime.sendMessage('disabletimer');
-        browser.browserAction.setBadgeText({ text: 'OFF' });
-    } else {
-        browser.runtime.sendMessage('enabletimer');
-        browser.browserAction.setBadgeText({ text: '' });
-    }
-
-    // Check timer schedule
-    browser.runtime.sendMessage('checkQuietTime');
 
     updateUI();
 }
 
-// Prefill saved settings into option page
-async function restoreOptions() {
-    const data = await browser.storage.local.get();
+/**
+ * Load settinsg from Storage API
+ */
+function restoreOptions() {
+    browser.storage.local.get((data) => {
+        document.settings.notificationMode.value = (typeof data.notificationMode !== 'undefined') ? data.notificationMode : 1;
+        document.settings.playChime.value = (typeof data.playChime !== 'undefined') ? data.playChime : 1;
+        document.settings.chimeVolume.value = (typeof data.chimeVolume !== 'undefined') ? data.chimeVolume * 100 : 100;
+        document.settings.tempDisabled.value = (typeof data.tempDisabled !== 'undefined') ? data.tempDisabled : 0;
+        document.settings.autoPause.value = (typeof data.autoPause !== 'undefined') ? data.autoPause : 0;
+        document.settings.scheduleEnabled.value = (typeof data.scheduleEnabled !== 'undefined') ? data.scheduleEnabled : 0;
 
-    // Notification mode setting
-    if (typeof data.notificationMode === 'undefined') document.settings.notificationMode.value = 1;
-    else document.settings.notificationMode.value = data.notificationMode;
+        // Schedule setting
+        if (typeof data.schedule === 'undefined') {
+            restoreSchedule({});
+        } else {
+            restoreSchedule(data.schedule);
+        }
 
-    // Play chime setting
-    if (typeof data.playChime === 'undefined') document.settings.playChime.value = 1;
-    else document.settings.playChime.value = data.playChime;
-
-    // Chime volume setting
-    if (typeof data.chimeVolume === 'undefined') document.settings.chimeVolume.value = 100;
-    else document.settings.chimeVolume.value = data.chimeVolume * 100;
-    document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
-
-    // Do Not Disturb setting
-    if (typeof data.tempDisabled === 'undefined') document.settings.tempDisabled.value = 0;
-    else document.settings.tempDisabled.value = data.tempDisabled;
-
-    // Auto pause setting
-    if (typeof data.autoPause === 'undefined') document.settings.autoPause.value = 0;
-    else document.settings.autoPause.value = data.autoPause;
-
-    // Schedule enabled setting
-    if (typeof data.scheduleEnabled === 'undefined') document.settings.scheduleEnabled.value = 0;
-    else document.settings.scheduleEnabled.value = data.scheduleEnabled;
-
-    // Schedule setting
-    if (typeof data.schedule === 'undefined') restoreSchedule({});
-    else restoreSchedule(data.schedule);
-
-    checkPermissions();
-    updateUI();
+        document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
+        checkPermissions();
+        updateUI();
+    });
 }
 
 /**
@@ -72,10 +50,10 @@ async function restoreOptions() {
  */
 function checkPermissions() {
     if (parseInt(document.settings.notificationMode.value) == 0) {
-        browser.permissions.contains(notificationsPermissions).then(processNotificationsPermissions);
+        browser.permissions.contains(PERMISSIONS_NOTIFICATION, processNotificationsPermissions);
     }
 
-    browser.permissions.contains(autoPausePermissions).then(processAutoPausePermissions);
+    browser.permissions.contains(PERMISSIONS_PAUSE, processAutoPausePermissions);
 }
 
 /**
@@ -93,7 +71,7 @@ function processAutoPausePermissions(allowed) {
         document.settings.autoPause.value = 0;
     }
 
-    for (input of inputs) {
+    for (const input of inputs) {
         input.disabled = !allowed;
     }
 }
@@ -371,7 +349,7 @@ function restoreSchedule(data) {
             const endHour = Math.floor(t.end / 60);
             const endMinute = t.end % 60;
             const time = addTime(w, startHour, startMinute, endHour, endMinute);
-            
+
             if (time != null) {
                 times[w].push(time);
             }
@@ -443,30 +421,36 @@ const weekdayList = [
 ];
 
 let times = {};
+const PERMISSIONS_NOTIFICATION = {
+    permissions: ['notifications']
+};
+const PERMISSIONS_PAUSE = {
+    permissions: ['tabs'],
+    origins: ['<all_urls>']
+};
+
+i18nParse();
 generateNumberOptions(document.getElementById('time-start-hour'), 23);
 generateNumberOptions(document.getElementById('time-end-hour'), 23);
 generateNumberOptions(document.getElementById('time-start-minute'), 59);
 generateNumberOptions(document.getElementById('time-end-minute'), 59);
-
-const notificationsPermissions = { permissions: ['notifications'] };
-const autoPausePermissions = { permissions: ['tabs'], origins: ['<all_urls>'] };
-i18nParse();
 restoreOptions();
-document.getElementsByTagName('form')[0].addEventListener('change', saveOptions);
+
+document.settings.addEventListener('change', saveOptions);
 document.settings.notificationMode.addEventListener('change', () => {
     // Handle optional permissions for browser notifications
     if (parseInt(document.settings.notificationMode.value) == 0) {
-        browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+        browser.permissions.request(PERMISSIONS_NOTIFICATION, processNotificationsPermissions);
     } else {
-        browser.permissions.remove(notificationsPermissions);
+        browser.permissions.remove(PERMISSIONS_NOTIFICATION);
         processNotificationsPermissions(true);
     }
 });
 document.getElementById('trigger-notificationsPermissionMissing').addEventListener('click', () => {
-    browser.permissions.request(notificationsPermissions).then(processNotificationsPermissions);
+    browser.permissions.request(PERMISSIONS_NOTIFICATION, processNotificationsPermissions);
 });
 document.getElementById('trigger-autoPausePermissionMissing').addEventListener('click', () => {
-    browser.permissions.request(autoPausePermissions).then(processAutoPausePermissions);
+    browser.permissions.request(PERMISSIONS_PAUSE, processAutoPausePermissions);
 });
 document.settings.chimeVolume.addEventListener('change', () => {
     document.getElementById('chimeVolumeLabel').textContent = document.settings.chimeVolume.value + '%';
@@ -475,4 +459,3 @@ document.getElementById('time-add').addEventListener('click', addTimeClick);
 document.getElementById('chimePreview').addEventListener('click', previewChime);
 browser.permissions.onAdded.addListener(checkPermissions);
 browser.permissions.onRemoved.addListener(checkPermissions);
-

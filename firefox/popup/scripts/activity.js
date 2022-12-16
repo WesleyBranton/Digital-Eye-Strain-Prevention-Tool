@@ -4,13 +4,17 @@
 
 i18nParse();
 document.getElementById('start').addEventListener('click', start);
+browser.alarms.onAlarm.addListener(timerTrigger);
 
-// Start the 20s countdown
+/**
+ * Start the 20 second countdown
+ */
 function start() {
     // Create timer
-    browser.alarms.create('countdown', { delayInMinutes: 0.33 });
-    browser.alarms.onAlarm.addListener(timerTrigger);
-    
+    browser.alarms.create('countdown', {
+        delayInMinutes: 0.33
+    });
+
     // Update GUI
     document.getElementById('start').style.display = 'none';
     document.getElementById('complete').style.display = 'inline';
@@ -19,12 +23,15 @@ function start() {
     document.getElementById('complete').addEventListener('click', closeWindow);
 }
 
-// Handle 20s countdown end
+/**
+ * Handle 20 second countdown end
+ * @param {Object} alarmInfo
+ */
 function timerTrigger(alarmInfo) {
     if (alarmInfo.name == 'countdown') {
         // Play alert sound
         document.getElementById('audio').play();
-        
+
         // Update GUI
         document.body.className = 'blinking';
         document.getElementById('complete').disabled = false;
@@ -32,12 +39,17 @@ function timerTrigger(alarmInfo) {
         document.getElementById('afterMsg').style.display = 'block';
 
         // Reset browserAction
-        browser.runtime.sendMessage('activityFinished');
+        browser.runtime.sendMessage({
+            command: 'activityFinished'
+        });
     }
 }
 
-// Close popup
-async function closeWindow() {
-    const popup = await browser.windows.getCurrent();
-    browser.windows.remove(popup.id);
+/**
+ * Close the current window
+ */
+function closeWindow() {
+    browser.windows.getCurrent((window) => {
+        browser.windows.remove(window.id);
+    });
 }

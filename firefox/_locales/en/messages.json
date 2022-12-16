@@ -99,7 +99,7 @@
     "actionOpenOptions": {
         "message": "Open Options"
     },
-    
+
     "errorFeatureRequiresPermission": {
         "message": "This feature requires additional permissions"
     },
