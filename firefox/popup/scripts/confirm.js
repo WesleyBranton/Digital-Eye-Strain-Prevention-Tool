@@ -4,16 +4,23 @@
 
 i18nParse();
 document.getElementById('close').addEventListener('click', closeWindow);
-document.getElementById('goback').addEventListener('click', goback);
+document.getElementById('goback').addEventListener('click', goToMenu);
 
-// Go back to main menu
-function goback() {
+/**
+ * Return to menu
+ */
+function goToMenu() {
     window.location.href = 'main.html';
 }
 
-// Close popup
-async function closeWindow() {
-    const popup = await browser.windows.getCurrent();
-    await browser.runtime.sendMessage('activityFinished');
-    browser.windows.remove(popup.id);
+/**
+ * Close the current window
+ */
+function closeWindow() {
+    browser.windows.getCurrent((window) => {
+        browser.runtime.sendMessage({
+            command: 'activityFinished'
+        });
+        browser.windows.remove(window.id);
+    });
 }

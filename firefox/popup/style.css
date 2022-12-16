@@ -75,28 +75,28 @@ section p {
     text-transform: uppercase;
     cursor: pointer;
     transition: ease all 0.5s;
-    box-shadow: 0 2px 4px 2px hsla(0,0%,0%,0.08);
+    box-shadow: 0 2px 4px 2px hsla(0, 0%, 0%, 0.08);
 }
 
 /* Green button */
 .button.green {
     color: var(--color-light);
     background-color: var(--color-green-light);
-    background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
+    background-image: linear-gradient(var(--color-green-light), var(--color-green-dark));
 }
 
 /* Red button */
 .button.red {
     color: var(--color-light);
     background-color: var(--color-red-light);
-    background-image: linear-gradient(var(--color-red-light),var(--color-red-dark));
+    background-image: linear-gradient(var(--color-red-light), var(--color-red-dark));
 }
 
 /* Disabled button */
 .button:disabled {
     color: var(--color-grey);
     background-color: var(--color-dull-light);
-    background-image: linear-gradient(var(--color-dull-light),var(--color-dull-dark));
+    background-image: linear-gradient(var(--color-dull-light), var(--color-dull-dark));
     cursor: not-allowed;
 }
 
@@ -113,12 +113,14 @@ section p {
 }
 
 /* Override hover effect for non-recommended option */
-.button.hidden:hover, .button:disabled:hover {
+.button.hidden:hover,
+.button:disabled:hover {
     filter: none !important;
 }
 
 /* Headings */
-h1, h3 {
+h1,
+h3 {
     text-align: center;
     padding: 0;
     margin: 0;
@@ -141,7 +143,7 @@ h1, h3 {
 #timer-bar {
     height: 10px;
     background-color: var(--color-green-light);
-    background-image: linear-gradient(var(--color-green-light),var(--color-green-dark));
+    background-image: linear-gradient(var(--color-green-light), var(--color-green-dark));
     border-radius: 3px;
     width: 100%;
 }
@@ -176,37 +178,87 @@ h1, h3 {
 
 /* Blinking animation */
 @keyframes blink {
-    from {background-color: var(--color-dark)}
-    to {background-color: var(--color-green-dark)}
+    from {
+        background-color: var(--color-dark)
+    }
+    to {
+        background-color: var(--color-green-dark)
+    }
 }
 
 /* Countdown number animation */
 @keyframes countdown {
-    0% {content: "20"}
-    5% {content: "19"}
-    10% {content: "18"}
-    15% {content: "17"}
-    20% {content: "16"}
-    25% {content: "15"}
-    30% {content: "14"}
-    35% {content: "13"}
-    40% {content: "12"}
-    45% {content: "11"}
-    50% {content: "10"}
-    55% {content: "9"}
-    60% {content: "8"}
-    65% {content: "7"}
-    70% {content: "6"}
-    75% {content: "5"}
-    80% {content: "4"}
-    85% {content: "3"}
-    90% {content: "2"}
-    95% {content: "1"}
-    100% {content: "0"}
+    0% {
+        content: "20"
+    }
+    5% {
+        content: "19"
+    }
+    10% {
+        content: "18"
+    }
+    15% {
+        content: "17"
+    }
+    20% {
+        content: "16"
+    }
+    25% {
+        content: "15"
+    }
+    30% {
+        content: "14"
+    }
+    35% {
+        content: "13"
+    }
+    40% {
+        content: "12"
+    }
+    45% {
+        content: "11"
+    }
+    50% {
+        content: "10"
+    }
+    55% {
+        content: "9"
+    }
+    60% {
+        content: "8"
+    }
+    65% {
+        content: "7"
+    }
+    70% {
+        content: "6"
+    }
+    75% {
+        content: "5"
+    }
+    80% {
+        content: "4"
+    }
+    85% {
+        content: "3"
+    }
+    90% {
+        content: "2"
+    }
+    95% {
+        content: "1"
+    }
+    100% {
+        content: "0"
+    }
 }
 
 /* Countdown progress bar animation */
 @keyframes countdown-bar {
-    from {width: 100%}
-    to {width: 0%}
+    from {
+        width: 100%
+    }
+    to {
+        width: 0%
+    }
 }
